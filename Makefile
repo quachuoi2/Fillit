@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+         #
+#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/06 11:13:50 by okinnune         ###   ########.fr        #
+#    Updated: 2022/01/06 19:28:25 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,12 @@ LIBFT= libft/libft.a
 FLAGS= -Wall -Wextra -Werror
 
 all:
-	gcc $(SOURCES) $(LIBFT) -I libft -I. $(FLAGS) -o $(NAME)
+	gcc $(SOURCES) $(LIBFT) -I libft $(FLAGS)
 
-fclean:
+clean:
+	rm -f $(wildcard *.o)
+
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
