@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_arrdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/07 14:18:44 by qnguyen          ###   ########.fr       */
+/*   Created: 2021/12/04 06:31:59 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/09 20:22:57 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
-# define TETRIS_END 20
-# define TETRIS_MAX 26
-# include "libft.h"
-# include "get_next_line.h"
-# include <fcntl.h>
+#include "libft.h"
 
-#endif
+void	ft_arrdel(char ***arr)
+{
+	int	i;
+
+	i = 0;
+	while ((*arr)[i] != NULL)
+		ft_strdel(&(*arr)[i++]);
+	free(*arr);
+	(*arr) = NULL;
+}
