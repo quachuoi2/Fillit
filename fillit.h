@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/10 06:46:25 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 18:01:31 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 typedef struct s_tetris
 {
-	int	box[4][2];
+	int		box[4][2];
+	char	c;
 }	t_tetris;
 
 typedef struct s_ipt
@@ -29,11 +30,12 @@ typedef struct s_ipt
 	int		count;
 }	t_ipt;
 
-t_tetris	tet_mapping(char *t);
+t_tetris	tet_mapping(char *t, int index);
+t_tetris	*swap(t_tetris *tet_list, int count);
 char		**map_gen(size_t size);
 void		map_liberator(char ***map, size_t size);
 void		map_print(char **map, size_t size);
 int			search(char **map, size_t size, t_tetris tet);
-int			comp(char ***map, size_t size, t_tetris tet, char c);
-int			try_pos(char ***map, size_t size, int i, int i2, int x, t_tetris tet, char c);
+int			comp(char ***map, size_t size, t_tetris tet);
+int			try_pos(char ***map, size_t size, int i, int i2, int x, t_tetris tet);
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/10 06:22:45 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 18:00:29 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_tetris	tet_mapping(char *t)
+t_tetris	tet_mapping(char *t, int index)
 {
 	t_tetris	tet;
 	int			col;
@@ -22,6 +22,7 @@ t_tetris	tet_mapping(char *t)
 	col = 0;
 	row = 0;
 	box_count = 0;
+	tet.c = index + 'A';
 	while (t[col])
 	{
 		if (t[col] == '#')

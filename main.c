@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/10 15:57:43 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 18:26:24 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,27 @@ int	error_check(char *tetri)
 
 int	fillit(char ***map, int count, t_tetris *tet_list)
 {
-	char		c;
 	int			i;
 	int			i2;
+	int			sw_count;
 
 	i = 2;
-	c = 'A';
+	i2 = 0;
 	while (i < 26)
 	{
 		*map = map_gen(i);
 		i2 = 0;
-		while (i2 < count)
+		sw_count = 0;
+		while (i2 < count && sw_count < count - 1)
 		{
-			if (comp(map, i, tet_list[i2], c++) == 0)
+			if (comp(map, i, tet_list[i2]) == 0)
 			{
-				c = 'A';
-				map_liberator(map, i);
-				break ;
+				tet_list = swap(tet_list, count);
+				sw_count++;
+				//printf("SWAPPED LIST AROUND %i, MAP SIZE %i\n", sw_count, i);
+				/*if (sw_count >= count - 1)
+					map_liberator(map, i);*/
+				i2 = -1;
 			}
 			i2++;
 		}
@@ -107,11 +111,12 @@ int	main(int argc, char **argv)
 		tetri = read_input_file(open(argv[1], O_RDONLY));
 		tet_list = (t_tetris *)malloc(sizeof(t_tetris) * tetri.count);
 		i = 0;
+		printf("TETRI COUNT %i\n", tetri.count);
 		while (i < tetri.count)
 		{
 			if (error_check(tetri.array[i]) == -1)
 				return (-1);
-			tet_list[i] = tet_mapping(tetri.array[i]);
+			tet_list[i] = tet_mapping(tetri.array[i], i);
 			i++;
 		}
 		map_print(map, fillit(&map, tetri.count, tet_list));
