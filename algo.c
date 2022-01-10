@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/10 06:46:50 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 15:52:24 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	comp(char ***map, size_t size, t_tetris tet, char c)
 		i2 = 0;
 		while (i2 < size)
 		{
-			if (try_pos(map, size, i, i2++, 0, tet, c) == 1)
+			if (try_pos(map, size, i, i2, 0, tet, c) == 1)
 				return (1);
+			i2++;
 		}
 		i++;
 	}

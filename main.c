@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/10 07:09:57 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 15:57:43 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ int	fillit(char ***map, int count, t_tetris *tet_list)
 		i2 = 0;
 		while (i2 < count)
 		{
-			if (comp(map, i, tet_list[i2++], c++) == 0)
+			if (comp(map, i, tet_list[i2], c++) == 0)
 			{
 				c = 'A';
 				map_liberator(map, i);
 				break;
 			}
+			i2++;
 		}
 		if (i2 == count)
 			break;
@@ -92,6 +93,7 @@ int	fillit(char ***map, int count, t_tetris *tet_list)
 int	main(int argc, char **argv)
 {
 	char		**map;
+	char		c;
 	int			fd;
 	int			i;
 	int			i2;
