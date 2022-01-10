@@ -39,12 +39,10 @@ t_ipt	read_input_file(int fd)
 int	error_check(char *tetri)
 {
 	int	i;
-	int	i2;
 	int	block_counter;
 
 	block_counter = 0;
 	i = 0;
-	i2 = 0;
 	while (tetri[i] != '\0')
 	{
 		if ((tetri[i] != '\n' && tetri[i] != '#' && tetri[i] != '.')
