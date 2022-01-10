@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/10 07:09:57 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 15:57:43 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	fillit(char ***map, int count, t_tetris *tet_list)
 int	main(int argc, char **argv)
 {
 	char		**map;
+	char		c;
 	int			fd;
 	int			i;
 	t_tetris	*tet_list;
