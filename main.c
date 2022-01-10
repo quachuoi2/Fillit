@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/10 06:47:12 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/10 07:09:57 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,42 @@ int	error_check(char *tetri)
 	return (1);
 }
 
+int	fillit(char ***map, int count, t_tetris *tet_list)
+{
+	char		c;
+	int			i;
+	int			i2;
+
+	i = 2;
+	c = 'A';
+	while (i < 26)
+	{
+		*map = map_gen(i);
+		i2 = 0;
+		while (i2 < count)
+		{
+			if (comp(map, i, tet_list[i2++], c++) == 0)
+			{
+				c = 'A';
+				map_liberator(map, i);
+				break;
+			}
+		}
+		if (i2 == count)
+			break;
+		i++;
+	}
+	return (i);
+}
+
 int	main(int argc, char **argv)
 {
-	t_ipt		tetri;
+	char		**map;
 	int			fd;
 	int			i;
 	int			i2;
 	t_tetris	*tet_list;
-	char		**map;
-	char		c;
+	t_ipt		tetri;
 
 	if (argc <= 1)
 		ft_putendl("usage: missing arguement");
@@ -90,40 +117,6 @@ int	main(int argc, char **argv)
 			i++;
 		}
 	}
-	i = 2;
-	c = 'A';
-	while (i < 26)
-	{
-		map = map_gen(i);
-		i2 = 0;
-		while (i2 < tetri.count)
-		{
-			if (comp(&map, i, tet_list[i2], c++) == 0)
-			{
-				c = 'A';
-				map_liberator(&map, i);
-				break;
-			}
-			i2++;
-		}
-		if (i2 == tetri.count)
-			break;
-		i++;
-	}
-	map_print(map, i);
+	map_print(map, fillit(&map, tetri.count, tet_list));
 	return (0);
 }
-
-/* 	i = 0;
-	while (i < tetri.count)
-	{
-		printf("tetris %d:\n", i);
-		print_pos(tet_list[i]);
-		i++;
-	} */
-/* 	map = (char **)malloc(sizeof(char *) *4);
-	map[0] = ft_strdup("....");
-	map[1] = ft_strdup("..##");
-	map[2] = ft_strdup("..##");
-	map[3] = ft_strdup("....");
-	comp(&map, 4, tet_list[1]); */

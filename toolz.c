@@ -1,6 +1,9 @@
 #include "fillit.h"
 #include <stdio.h>
 
+/* Don't pay attention to this file */
+
+
 void print_all_tet(char ***arr)
 {
 	int i = 0;
