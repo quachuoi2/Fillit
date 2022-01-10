@@ -96,7 +96,6 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	char		c;
-	int			fd;
 	int			i;
 	t_tetris	*tet_list;
 	t_ipt		tetri;
@@ -105,8 +104,7 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing argument");
 	else
 	{
-		fd = open(argv[1], O_RDONLY);
-		tetri = read_input_file(fd);
+		tetri = read_input_file(open(argv[1], O_RDONLY));
 		tet_list = (t_tetris *)malloc(sizeof(t_tetris) * tetri.count);
 		i = 0;
 		while (i < tetri.count)
