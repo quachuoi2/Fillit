@@ -3,38 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/31 14:52:38 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/13 15:32:50 by okinnune         ###   ########.fr       */
+/*   Created: 2021/10/31 22:10:42 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/10/31 22:10:42 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*								FT_ATOI										*/
-/*				Returns an integer representation of the string str			*/
+static char	check_negative(char c)
+{
+	if (c == '-')
+		return ('n');
+	else if (c == '+')
+		return ('p');
+	else
+		return ('z');
+}
 
 int	ft_atoi(const char *str)
 {
-	int				mul;
-	long long int	res;
+	int				i;
+	long long		sum;
+	char			np;
 
-	res = 0;
-	mul = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || (*str >= 11
-			&& *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-		mul += -(*(str++) == '-') * 2;
-	while (*str == '0')
-		str++;
-	while (ft_isdigit(*str))
+	i = 0;
+	while (ft_isspace(str[i]) == 1)
+		i++;
+	np = check_negative(str[i]);
+	if (np == 'p' || np == 'n')
+		i++;
+	sum = 0;
+	while (str[i] != '\0')
 	{
-		res = (res * 10) + (*str - '0');
-		str++;
-		if (res > 2147483648 - mul)
-			return (-(res * mul > 2147483647));
+		if (str[i] > 47 && str[i] < 58)
+			sum = (sum * 10) + (str[i] - '0');
+		else
+			break ;
+		i++;
 	}
-	return (res * mul);
+	if (np == 'n')
+		return ((int)(sum * -1));
+	else
+		return ((int)sum);
 }

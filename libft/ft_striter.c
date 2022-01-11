@@ -3,18 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 19:43:29 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/08 13:44:45 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/03 14:01:05 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/14 18:41:52 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	ft_striter(char *s, void (*f)(char *))
 {
-	while (*s)
-	{
-		f(s);
-		s++;
-	}
+	int	i;
+
+	if (f == NULL)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+		f(&s[i++]);
 }

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pow.c                                           :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 14:25:27 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/26 13:46:16 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/08 17:28:53 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/08 22:03:54 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*						FT_POWER						*/
-/*		Returns int 'n' raised to the power of 'p'		*/
+#include "libft.h"
 
-int	ft_pow(int n, int p)
+int	ft_isspace(int c)
 {
-	int	cur_p;
-	int	r;
-
-	if (p == 0)
+	if (c == ' ' || c == '\n' || c == '\t' || c == '\f' || c == '\r'
+		|| c == '\v')
 		return (1);
-	cur_p = 1;
-	r = n;
-	while (cur_p < p)
-	{
-		r = r * n;
-		cur_p++;
-	}
-	return (r);
+	else
+		return (0);
 }

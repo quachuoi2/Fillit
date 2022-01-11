@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 20:20:03 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/26 12:14:50 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/03 14:29:40 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/15 19:20:38 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmap(const char *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	char	*res;
-	size_t	i;
-	size_t	len;
+	char	*s_n;
+	int		i;
 
+	if (f == NULL)
+		return (NULL);
 	i = 0;
-	len = ft_strlen((char *)s);
-	res = (char *)malloc(len + 1);
-	if (res == NULL)
-		return (res);
-	while (i < len)
+	s_n = (char *)malloc(ft_strlen((char *)s) + 1);
+	if (s_n == NULL)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		res[i] = f(s[i]);
+		s_n[i] = f(s[i]);
 		i++;
 	}
-	res[i] = '\0';
-	return (res);
+	s_n[i] = '\0';
+	return (s_n);
 }

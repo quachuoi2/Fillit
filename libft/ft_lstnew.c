@@ -3,40 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 19:04:49 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/15 18:05:34 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/07 01:50:56 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/09 11:45:10 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(const void *content, size_t content_size)
+t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list	*res;
-	size_t	i;
+	t_list	*new_link;
 
-	res = (t_list *)malloc(sizeof(t_list));
-	if (content == NULL && res != NULL)
+	new_link = (t_list *)malloc(sizeof(t_list));
+	if (new_link != NULL)
 	{
-		res->content_size = 0;
-		res->content = NULL;
-		res->next = NULL;
-	}
-	else if (res != NULL)
-	{
-		res->content = malloc(content_size);
-		if (res->content == NULL)
+		if (content == NULL)
 		{
-			free (res);
-			return (NULL);
+			(*new_link).content = NULL;
+			(*new_link).content_size = 0;
 		}
-		i = 0;
-		while (i++ < content_size)
-			*(char *)(res->content + i - 1) = *(char *)(content + i - 1);
-		res->content_size = content_size;
-		res->next = NULL;
+		else
+		{
+			(*new_link).content_size = content_size;
+			(*new_link).content = malloc(content_size);
+			if ((*new_link).content == NULL)
+			{
+				free(new_link);
+				return (NULL);
+			}
+			ft_memcpy((*new_link).content, (void *)content, content_size);
+		}
+		(*new_link).next = NULL;
 	}
-	return (res);
+	return (new_link);
 }

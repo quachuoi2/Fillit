@@ -3,42 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 13:56:19 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/15 15:46:13 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/05 05:48:16 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/09 20:27:01 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*								FT_ITOA										*/
-/*				Returns a string representation of the integer n			*/
-/*																			*/
-/* 						LINE50: neg + len - (i - neg) - 1					*/
-/*		This is an 'inverted index' to access the array in reverse order	*/
-
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*res;
-	int		i;
-	int		neg;
+	char	*s;
+	int		c;
 
-	neg = n < 0;
-	len = ft_digitcount(n);
-	res = (char *)malloc(neg + len + 1);
-	if (res == NULL)
-		return (res);
-	i = 0;
-	if (neg)
-		res[i++] = '-';
-	while (i < neg + len)
+	c = ft_diglen(n);
+	s = (char *)malloc(sizeof(char) * (c + 1 + 1));
+	if (s == NULL)
+		return (NULL);
+	if (n == -2147483648)
+		return (ft_strcpy(s, "-2147483648"));
+	if (n < 0)
 	{
-		res[neg + len - (i - neg) - 1] = ft_abs(n % 10) + '0';
-		n = n / 10;
-		i++;
+		s[0] = '-';
+		n = -n;
+		c++;
 	}
-	res[i] = '\0';
-	return (res);
+	s[c--] = '\0';
+	while (n / 10 > 0)
+	{
+		s[c--] = (n % 10) + '0';
+		n = n / 10;
+	}
+	s[c] = n + '0';
+	return (s);
 }

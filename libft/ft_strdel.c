@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 19:40:12 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/26 15:27:30 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/02 20:21:12 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/02 20:21:12 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*									FT_STRDEL								*/
-/*			frees the string's address 'as'  and sets the pointer to NULL	*/
-
 void	ft_strdel(char **as)
 {
+	ft_memset(*as, '\0', ft_strlen(*as));
 	free(*as);
 	*as = NULL;
 }

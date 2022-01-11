@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_lststrsplit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 23:13:47 by qnguyen           #+#    #+#             */
-/*   Updated: 2021/12/08 21:53:40 by qnguyen          ###   ########.fr       */
+/*   Created: 2021/12/02 18:04:41 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/08 21:55:16 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_failed_malloc(char ***arr, int i)
+t_list	*ft_lststrsplit(const char *s, char c)
 {
-	if ((*arr)[i] == NULL)
-	{
-		ft_arrdel(arr);
-		return (0);
-	}
-	return (1);
-}
-
-char	**ft_strsplit(const char *s, char c)
-{
-	char	**arr;
+	t_list	*lst;
 	char	*buf;
 	t_index	index;
 
-	arr = (char **)ft_memalloc(sizeof(char *) * (ft_countwords(s, c) + 1));
+	lst = NULL;
 	buf = (char *)ft_memalloc(sizeof(char) * ft_strlen(s));
-	if (arr == NULL || buf == NULL)
+	if (buf == NULL)
 		return (NULL);
 	index.i = 0;
-	index.k = 0;
 	while (index.i <= (int)ft_strlen(s))
 	{
 		index.j = 0;
@@ -41,11 +30,9 @@ char	**ft_strsplit(const char *s, char c)
 			buf[index.j++] = s[index.i++];
 		buf[index.j] = '\0';
 		if (buf[0] != '\0')
-			arr[index.k++] = ft_strdup(buf);
-		if (index.k > 0 && check_failed_malloc(&arr, index.k - 1) == 0)
-			return (NULL);
+			ft_lstadd_back(&lst, ft_lstnew(buf, ft_strlen(buf) + 1));
 		index.i++;
 	}
 	free(buf);
-	return (arr);
+	return (lst);
 }

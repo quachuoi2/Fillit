@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 19:37:01 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/15 15:34:12 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/02 20:21:12 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/02 20:21:12 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*							FT_STRNEW										*/
-/*	Returns a new string with size 'size'. All characters are set to '\0'.	*/
-
 char	*ft_strnew(size_t size)
 {
-	char	*res;
+	char	*str;
 
-	res = (char *)malloc(size + 1);
-	if (res != NULL)
-		ft_bzero(res, size + 1);
-	return (res);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	if (str == NULL)
+		return (NULL);
+	ft_bzero(str, size + 1);
+	return (str);
 }

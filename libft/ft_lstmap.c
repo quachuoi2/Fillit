@@ -3,41 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 16:51:09 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/16 19:28:53 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/07 02:27:06 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/10 16:42:49 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void	delete(void *content, size_t size)
-{
-	if (size > 0)
-		free(content);
-}
-
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list	*new;
+	t_list	*map;
 	t_list	*temp;
 
-	new = NULL;
+	if (f == NULL || lst == NULL)
+		return (NULL);
+	map = f(lst);
+	if (map == NULL)
+		return (NULL);
+	temp = map;
+	lst = (*lst).next;
 	while (lst != NULL)
 	{
-		temp = f(lst);
-		if (temp == NULL)
+		(*temp).next = f(lst);
+		if ((*temp).next == NULL)
 		{
-			if (new != NULL)
-				ft_lstdel(&new, delete);
+			ft_lstdel(&map, ft_linkdel);
 			return (NULL);
 		}
-		if (new == NULL)
-			new = temp;
-		else
-			ft_lstapp(&new, temp);
-		lst = lst->next;
+		temp = (*temp).next;
+		lst = (*lst).next;
 	}
-	return (new);
+	(*temp).next = NULL;
+	return (map);
 }

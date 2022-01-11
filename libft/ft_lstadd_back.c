@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strfill.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 21:23:59 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/15 15:44:14 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/09 01:43:55 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/07 22:29:33 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*							FT_STRFILL						*/
-/*		Sets all characters of string 's' to character 'c'	*/
+#include "libft.h"
 
-void	ft_strfill(char *s, char c)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	while (*s)
-		*s++ = c;
+	t_list	*temp;
+
+	if (*alst == NULL)
+		*alst = new;
+	else
+	{
+		temp = ft_lstlast(*alst);
+		(*temp).next = new;
+	}
+	(*new).next = NULL;
 }

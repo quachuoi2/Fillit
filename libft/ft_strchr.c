@@ -3,25 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 15:29:26 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/03 12:22:08 by okinnune         ###   ########.fr       */
+/*   Created: 2021/10/31 20:59:18 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/03 21:23:00 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*						FT_STRCHR										*/
-/*	Locates the first occurence of 'character' in 'str'. If found,		*/
-/*	returns a pointer to the first occurence of 'character' in 'str'	*/
-/*	Added null protection for get_next_line								*/
-
-char	*ft_strchr(const char *str, int character)
+char	*ft_strchr(const char *s, int c)
 {
-	while (*str != (char)character && *str != '\0')
-		str++;
-	if (*str == (char)character)
-		return ((char *)str);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s[j] != '\0')
+		j++;
+	while (i <= j)
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
 	return (NULL);
 }

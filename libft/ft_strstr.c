@@ -3,44 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 16:00:08 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/03 00:43:01 by okinnune         ###   ########.fr       */
+/*   Created: 2021/10/31 21:53:11 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/10/31 21:53:11 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*					FT_STRSTR												*/
-/*		Locates	substring 'needle' in 'haystack'. If found, returns the		*/
-/*		pointer to the first occurence of 'needle' in 'haystack'			*/
-
-char	*ft_strstr(const char *haystack, const char *needle)
+char	*ft_strstr(const char *str, const char *to_find)
 {
-	int		i;
-	int		ni;
-	char	*match;
+	int	i;
+	int	i2;
 
 	i = 0;
-	ni = 0;
-	match = NULL;
-	if (!*needle)
-		return ((char *)haystack);
-	while (haystack[i] != '\0' && match == NULL)
+	i2 = 0;
+	while (str[i] != '\0')
 	{
-		if (haystack[i] == needle[0])
-		{
-			while (needle[ni] == haystack[i + ni] && needle[ni]
-				&& haystack[i + ni])
-				ni++;
-			if (needle[ni] == '\0')
-			{
-				match = (char *)(haystack + i);
-				break ;
-			}
-		}
+		while (str[i + i2] == to_find[i2] && to_find[i2] != '\0')
+			i2++;
+		if (to_find[i2] == '\0')
+			return ((char *)&str[i]);
+		else
+			i2 = 0;
 		i++;
 	}
-	return (match);
+	if (to_find[i2] == '\0')
+		return ((char *)&str[i]);
+	return (NULL);
 }

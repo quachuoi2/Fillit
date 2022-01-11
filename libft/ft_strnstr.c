@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 16:00:08 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/17 05:52:43 by okinnune         ###   ########.fr       */
+/*   Created: 2021/10/31 21:53:11 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/10/31 21:53:11 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*							FT_STRNSTR										*/
-/*		Locates	substring 'needle' in 'haystack', but searches only up to	*/
-/* 		'len' characters. If found, returns the	pointer to the first		*/
-/*		occurence of 'needle' in 'haystack'.								*/
-
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
 	size_t	i;
-	size_t	ni;
-	char	*match;
+	size_t	i2;
+	size_t	s_len;
 
 	i = 0;
-	ni = 0;
-	match = NULL;
-	if (!*needle)
-		return ((char *)haystack);
-	while (haystack[i] != '\0' && match == NULL && i < len)
+	i2 = 0;
+	if (str[0] == '\0' && to_find[0] == '\0')
+		return ((char *)str);
+	s_len = ft_strlen(str);
+	while (str[i] != '\0')
 	{
-		if (haystack[i] == needle[0])
-		{
-			while (needle[ni] == haystack[i + ni] && i + ni < len && needle[ni])
-				ni++;
-			if (needle[ni] == '\0')
-				match = (char *)(haystack + i);
-		}
+		while (str[i + i2] == to_find[i2] && i + i2 < len && i + i2 < s_len)
+			i2++;
+		if (to_find[i2] == '\0')
+			return ((char *)(str + i));
+		else
+			i2 = 0;
 		i++;
 	}
-	return (match);
+	return (0);
 }

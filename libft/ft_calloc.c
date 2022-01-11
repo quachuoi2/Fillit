@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/30 00:34:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2021/10/30 00:34:15 by qnguyen          ###   ########.fr       */
+/*   Created: 2021/11/02 20:21:12 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/02 20:21:12 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncat(char *dest, const char *src, size_t n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	i;
-	size_t	l;
+	void		*mem;
+	size_t		i;
 
+	if (count <= 0 || size <= 0)
+		return (NULL);
+	mem = malloc(count * size);
+	if (mem == NULL)
+		return (NULL);
 	i = 0;
-	l = 0;
-	while (dest[l] != '\0')
-		l++;
-	while (i < n && src[i] != '\0')
-		dest[l++] = ((char *)src)[i++];
-	dest[l] = '\0';
-	return (dest);
+	while (i < size)
+		((char *)mem)[i++] = 0;
+	return (mem);
 }

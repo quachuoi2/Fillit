@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_digitcount.c                                    :+:      :+:    :+:   */
+/*   ft_countwords.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 16:21:22 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/25 17:41:03 by okinnune         ###   ########.fr       */
+/*   Created: 2021/12/02 18:01:45 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/02 18:01:54 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*							FT_DIGITCOUNT						*/
-/*			Returns how many digits is in the integer n			*/
-
-int	ft_digitcount(int n)
+int	ft_countwords(const char *s, char c)
 {
 	int	i;
+	int	words;
 
-	i = 1;
-	while (n / 10 != 0)
+	i = 0;
+	words = 0;
+	while (s[i] != '\0')
 	{
-		n = n / 10;
+		if ((s[i] == c) && (s[i + 1] != c) && (s[i + 1] != '\0'))
+			words++;
 		i++;
 	}
-	return (i);
+	if (s[0] != c)
+		words++;
+	return (words);
 }

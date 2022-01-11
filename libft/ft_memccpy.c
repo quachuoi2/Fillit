@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 12:42:33 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/26 15:42:22 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/01 21:33:20 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/07 16:25:50 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,18 @@
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
 	size_t	i;
-	size_t	occurence;
-	char	*chrres;
 
 	i = 0;
-	chrres = (char *)ft_memchr((void *)src, c, n);
-	if (chrres != NULL)
-		occurence = chrres - (char *) src;
-	else
-		occurence = n;
-	while (i < n && i < occurence + 1)
+	if (dst == NULL && src == NULL && n == 0)
+		return (NULL);
+	while (i < n)
 	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		((char *)dst)[i] = ((char *)src)[i];
+		if (((char *)src)[i] == (char)c)
+			break ;
 		i++;
 	}
-	if (chrres != NULL)
-		return (dst + i);
-	else
-		return (NULL);
+	if (((char *)src)[i] == (char)c)
+		return (dst + i + 1);
+	return (NULL);
 }

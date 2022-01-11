@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ft_linkdel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 18:40:19 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/26 15:31:47 by okinnune         ###   ########.fr       */
+/*   Created: 2021/12/04 06:22:30 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/12 04:52:04 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_sqrt(int nb)
-{
-	int	r;
-	int	temp;
+#include "libft.h"
 
-	r = 0;
-	temp = 0;
-	if (nb <= 0)
-		return (0);
-	while (temp < nb)
-	{
-		r++;
-		temp = r * r;
-	}
-	if (temp == nb)
-		return (r);
-	else
-		return (0);
+void	ft_linkdel(void *content, size_t content_size)
+{
+	ft_memset(content, '\0', content_size);
+	free(content);
+	content = NULL;
 }

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 14:53:55 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/20 17:22:37 by okinnune         ###   ########.fr       */
+/*   Created: 2021/12/02 17:46:55 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/02 17:50:18 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*							FT_ABS								*/
-/*			Returns the absolute value of the integer n			*/
+#include "libft.h"
 
-int	ft_abs(int n)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
+	if (lst != NULL)
+	{
+		while ((*lst).next != NULL)
+			lst = (*lst).next;
+	}
+	return (lst);
 }

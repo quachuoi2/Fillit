@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 17:32:34 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/26 13:26:01 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/02 20:15:17 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/02 20:15:17 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(const char *s)
+void	ft_putstr(char *s)
 {
-	size_t	len;
-
-	len = ft_strlen((char *)s);
-	if (len > 0)
-		write(1, s, len);
+	write(1, s, ft_strlen(s));
 }

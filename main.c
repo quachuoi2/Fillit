@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/11 18:33:45 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/11 18:40:20 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv)
 			tet_list[i].c = c++;
 			tet_list[i++].total = tetri.count;
 		}
-		map_print(map, fillit(&map, tetri.count, tet_list));
+		//map_print(map, fillit(&map, tet_list));
 	}
 	map_liberator(&map, map_print(map, fillit(&map, tet_list)));
 	free(tet_list);

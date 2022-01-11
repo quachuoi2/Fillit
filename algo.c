@@ -6,13 +6,13 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/11 18:22:59 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/11 18:37:40 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <time.h>
-void delay(int number_of_seconds)
+#include <time.h> //rm
+void delay(int number_of_seconds) //rm
 {
     // Converting time into milli_seconds
     int milli_seconds = 1000 * number_of_seconds;

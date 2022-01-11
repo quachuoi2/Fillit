@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 19:27:25 by okinnune          #+#    #+#             */
-/*   Updated: 2021/11/12 13:49:00 by okinnune         ###   ########.fr       */
+/*   Created: 2021/11/02 20:21:12 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/11/02 20:21:12 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/*							FT_MEMDEL							*/
-/*			frees the memory of pointer ap and sets ap to NULL	*/
 
 void	ft_memdel(void **ap)
 {

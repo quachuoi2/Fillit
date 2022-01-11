@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 15:29:26 by okinnune          #+#    #+#             */
-/*   Updated: 2021/12/13 15:47:06 by okinnune         ###   ########.fr       */
+/*   Created: 2021/10/31 20:59:18 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/10/31 20:59:18 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*						FT_STRRCHR										*/
-/*	Locates the last occurence of 'character' in 'str'. If found,		*/
-/*	returns a pointer to the last occurence of 'character' in 'str'		*/
-
-char	*ft_strrchr(const char *str, int character)
+char	*ft_strrchr(const char *s, int c)
 {
-	const char	*match;
+	int	i;
 
-	match = NULL;
-	while (*str != '\0')
+	i = (int)ft_strlen(s);
+	while (i >= 0)
 	{
-		if (*str == (char)character)
-			match = str;
-		str++;
+		if (s[i] == c)
+			return ((char *)s + i);
+		i--;
 	}
-	if (character == '\0' && *str == '\0')
-		match = str;
-	return ((char *)match);
+	return (NULL);
 }

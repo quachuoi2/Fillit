@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsub.c                                        :+:      :+:    :+:   */
+/*   ft_dlen.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 16:05:48 by qnguyen           #+#    #+#             */
-/*   Updated: 2021/11/13 17:37:44 by qnguyen          ###   ########.fr       */
+/*   Created: 2021/12/02 17:45:03 by qnguyen           #+#    #+#             */
+/*   Updated: 2021/12/02 17:45:33 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+int	ft_diglen(int n)
 {
-	char	*str;
-	size_t	i;
+	int	i;
 
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (i < len)
+	i = 1;
+	if (n == -2147483648)
+		return (10);
+	if (n < 0)
+		n = -n;
+	while (n / 10 > 0)
 	{
-		str[i] = s[start + i];
+		n = n / 10;
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	return (i);
 }
