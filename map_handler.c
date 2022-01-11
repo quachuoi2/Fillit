@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/10 06:22:45 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/11 18:11:11 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ t_tetris	tet_mapping(char *t)
 	return (tet);
 }
 
+void	tet_place(char ***map, t_coord coord, t_tetris tet, char c)
+{
+	int	index;
+	int	x;
+	int	y;
+
+	index = -1;
+	while (++index < 4)
+	{
+		x = coord.x + tet.box[index][1] - tet.box[0][1];
+		y = coord.y + tet.box[index][0] - tet.box[0][0];
+		(*map)[y][x] = c;
+	}
+}
+
 char	**map_gen(size_t size)
 {
 	char	**map;
@@ -59,7 +74,7 @@ void	map_liberator(char ***map, size_t size)
 	ft_memdel((void **)map);
 }
 
-void	map_print(char **map, size_t size)
+size_t	map_print(char **map, size_t size)
 {
 	int	i;
 	int	i2;
@@ -71,9 +86,10 @@ void	map_print(char **map, size_t size)
 		while (i2 < size)
 		{
 			ft_putchar(map[i][i2++]);
-			ft_putchar(' ');
+			//ft_putchar(' ');
 		}
 		ft_putchar('\n');
 		i++;
 	}
+	return (size);
 }

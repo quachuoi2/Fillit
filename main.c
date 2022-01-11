@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/10 15:57:43 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/11 17:44:46 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void print_all_tet(char ***arr); //rm
 void print_pos(t_tetris t); //rm
 
-t_ipt	read_input_file(int fd)
+t_ipt	read_input_file(char *file)
 {
 	t_ipt	ipt;
 	int		ret;
+	int		fd;
 
+	fd = open(file, O_RDONLY);
 	ipt.count = 0;
 	ipt.array = (char **)malloc(sizeof(char *) * TETRIS_MAX);
 	while (ipt.count < 26)
@@ -61,31 +63,27 @@ int	error_check(char *tetri)
 	return (1);
 }
 
-int	fillit(char ***map, int count, t_tetris *tet_list)
+int	fillit(char ***map, t_tetris *tet_list)
 {
-	char		c;
 	int			i;
 	int			i2;
+	int a;
+	t_coord		coord;
 
 	i = 2;
-	c = 'A';
-	while (i < 26)
+	coord.y = 0;
+	coord.x = 0;
+	*map = map_gen(i);
+	while (1)
 	{
-		*map = map_gen(i);
-		i2 = 0;
-		while (i2 < count)
-		{
-			if (comp(map, i, tet_list[i2], c++) == 0)
+		a = comp1(map, i, coord, tet_list, 0);
+		if (a != 1)
 			{
-				c = 'A';
-				map_liberator(map, i);
-				break;
+				map_liberator(map, i++);
+				*map = map_gen(i);
 			}
-			i2++;
-		}
-		if (i2 == count)
+		else
 			break;
-		i++;
 	}
 	return (i);
 }
@@ -94,9 +92,7 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	char		c;
-	int			fd;
 	int			i;
-	int			i2;
 	t_tetris	*tet_list;
 	t_ipt		tetri;
 
@@ -104,10 +100,10 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing arguement");
 	else
 	{
-		fd = open(argv[1], O_RDONLY);
-		tetri = read_input_file(fd);
-		tet_list = (t_tetris *)malloc(sizeof(t_tetris) * tetri.count);
+		tetri = read_input_file(argv[1]);
+		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = 0;
+		c = 'A';
 		while (i < tetri.count)
 		{
 			if (error_check(tetri.array[i]) == -1)
@@ -116,9 +112,18 @@ int	main(int argc, char **argv)
 				return (-1);
 			}
 			tet_list[i] = tet_mapping(tetri.array[i]);
-			i++;
+			tet_list[i].c = c++;
+			tet_list[i++].total = tetri.count;
 		}
 	}
-	map_print(map, fillit(&map, tetri.count, tet_list));
+	map_liberator(&map, map_print(map, fillit(&map, tet_list)));
+	free(tet_list);
+	i = 0;
+	while (i < tetri.count)
+	{
+		free(tetri.array[i]);
+		i++;
+	}
+	free(tetri.array);
 	return (0);
 }
