@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/11 16:55:09 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/11 18:34:36 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ typedef struct	s_tetris
 	t_coord	coord;
 }				t_tetris;
 
-typedef struct	s_ipt
+typedef struct s_ipt
 {
 	char	**array;
 	int		count;
-}				t_ipt;
+}	t_ipt;
 
 
 t_tetris	tet_mapping(char *t);
-char 		**map_gen(size_t size);
+char		**map_gen(size_t size);
 void		map_liberator(char ***map, size_t size);
 size_t		map_print(char **map, size_t size);
 int	search(char **map, size_t size, t_tetris tet);

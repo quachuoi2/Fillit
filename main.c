@@ -6,14 +6,14 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/11 17:44:46 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/11 18:33:45 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void print_all_tet(char ***arr); //rm
-void print_pos(t_tetris t); //rm
+void	print_all_tet(char ***arr); //rm
+void	print_pos(t_tetris t); //rm
 
 t_ipt	read_input_file(char *file)
 {
@@ -54,12 +54,14 @@ int	error_check(char *tetri)
 			|| (tetri[i] == '#' && tetri[i + 1] != '#' && tetri[i + 5] != '#'
 				&& tetri[i - 1] != '#' && tetri[i - 5] != '#'))
 			return (-1);
-		if (tetri[i] == '#')
-			block_counter++;
+		block_counter += (tetri[i] == '#');
 		i++;
 	}
 	if (i < 20 || block_counter != 4)
+	{
+		ft_putstr("error\n");
 		return (-1);
+	}
 	return (1);
 }
 
@@ -97,7 +99,7 @@ int	main(int argc, char **argv)
 	t_ipt		tetri;
 
 	if (argc <= 1)
-		ft_putendl("usage: missing arguement");
+		ft_putendl("usage: missing argument");
 	else
 	{
 		tetri = read_input_file(argv[1]);
@@ -107,14 +109,12 @@ int	main(int argc, char **argv)
 		while (i < tetri.count)
 		{
 			if (error_check(tetri.array[i]) == -1)
-			{
-				printf("no\n");
 				return (-1);
-			}
 			tet_list[i] = tet_mapping(tetri.array[i]);
 			tet_list[i].c = c++;
 			tet_list[i++].total = tetri.count;
 		}
+		map_print(map, fillit(&map, tetri.count, tet_list));
 	}
 	map_liberator(&map, map_print(map, fillit(&map, tet_list)));
 	free(tet_list);
