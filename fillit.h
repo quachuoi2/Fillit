@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/11 18:34:36 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/12 18:50:23 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 # define TETRIS_MAX 26
 # include "libft.h"
 # include <fcntl.h>
-#include <stdio.h> //remooove
 
 typedef struct s_coordinate
 {
-	size_t x;
-	size_t y;
+	size_t	x;
+	size_t	y;
 }				t_coord;
 
-typedef struct	s_tetris
+typedef struct s_tetris
 {
 	char	c;
 	int		box[4][2];
@@ -38,16 +37,19 @@ typedef struct s_ipt
 	int		count;
 }	t_ipt;
 
+t_tetris	tet_mapping(char *t, char c, int total);
 
-t_tetris	tet_mapping(char *t);
-char		**map_gen(size_t size);
+char		**map_gennerator(size_t size);
+
 void		map_liberator(char ***map, size_t size);
-size_t		map_print(char **map, size_t size);
-int	search(char **map, size_t size, t_tetris tet);
-int	comp(char ***map, size_t size, t_tetris *tet_list, int c_box);
-int	try_pos(char ***map, size_t size, int i, int i2, int x, t_tetris *tet_list, int c_box);
 
-int	comp1(char ***map, size_t size, t_coord coord, t_tetris *tet_list, int c_box);
-int	try_pos1(char ***map, size_t size, t_coord coord, t_tetris *tet);
-void	tet_place(char ***map, t_coord coord, t_tetris tet, char c);
+size_t		map_printer(char **map, size_t size);
+
+int			search(char **map, size_t size, t_tetris tet);
+
+int			try_pos(char ***map, size_t size, t_coord coord, t_tetris *tet);
+
+void		tet_place(char ***map, t_coord coord, t_tetris tet, char c);
+
+int			comp(char ***map, size_t size, t_tetris *list, int c_box);
 #endif

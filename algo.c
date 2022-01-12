@@ -6,50 +6,42 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/11 19:34:56 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/12 19:01:50 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	comp1(char ***map, size_t size, t_coord coord, t_tetris *list, int c_box)
+int	comp(char ***map, size_t size, t_tetris *list, int c_box)
 {
-	while (coord.y < size)
+	t_coord	coord;
+
+	coord.y = -1;
+	while (++coord.y < size)
 	{
-		while (coord.x < size)
+		coord.x = -1;
+		while (++coord.x < size)
 		{
-			if (try_pos1(map, size, coord, &list[c_box]) == 1)
+			if (try_pos(map, size, coord, &list[c_box]) == 1)
 			{
 				tet_place(map, coord, list[c_box], list[c_box].c);
+				if (++c_box == list[0].total)
+					return (1);
 				coord.y = 0;
 				coord.x = -1;
-				c_box++;
-				if (c_box == list[0].total)
-					return (1);
 			}
-			coord.x++;
+			else if (coord.x == size - 1 && coord.y == size -1)
+			{
+				if (c_box-- == 0)
+					return (0);
+				tet_place(map, list[c_box].coord, list[c_box], '.');
+				coord = list[c_box].coord;
+			}
 		}
-		coord.y++;
-		coord.x = 0;
 	}
-	if (c_box-- > 0)
-	{
-		tet_place(map, list[c_box].coord, list[c_box], '.');
-		coord.y = list[c_box].coord.y;
-		if (list[c_box].coord.x == size)
-		{
-			coord.x = 0;
-			coord.y++;
-		}
-		else
-			coord.x = list[c_box].coord.x + 1;
-		if (coord.y < size && comp1(map, size, coord, list, c_box) == 1)
-			return (1);
-	}
-	return (0);
 }
 
-int	try_pos1(char ***map, size_t size, t_coord coord, t_tetris *tet)
+int	try_pos(char ***map, size_t size, t_coord coord, t_tetris *tet)
 {
 	int	index;
 	int	x;
@@ -76,45 +68,3 @@ int	try_pos1(char ***map, size_t size, t_coord coord, t_tetris *tet)
 	}
 	return (0);
 }
-
-/* int	comp(char ***map, size_t size, t_tetris *list, int c_box)
-{
-	size_t	i;
-	size_t	i2;
-
-	if (c_box == list[0].total)
-		return (1);
-	i = 0;
-	while (i < size)
-	{
-		i2 = 0;
-		while (i2 < size)
-		{
-			if (try_pos(map, size, i, i2, 0, list, c_box) == 1)
-				return (1);
-			i2++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	try_pos(char ***map, size_t size, int i, int i2, int x, t_tetris *list, int c_box)
-{
-	if (x == 4)
-		return (1);
-	if (i >= size || i2 >= size)
-		return (0);
-	if ((*map)[i][i2] == '.' && try_pos(map, size, i + (list[c_box].box[x + 1][0] - list[c_box].box[x][0]), i2 + (list[c_box].box[x + 1][1] - list[c_box].box[x][1]), x + 1, list, c_box) == 1)
-			(*map)[i][i2] = list[c_box].c;
-	else
-		return (0);
-	if (x == 0)
-	{
-		if (comp(map, size, list, c_box + 1) == 1)
-			return (1);
-		else
-			return (0);
-	}
-	return (1);
-} */

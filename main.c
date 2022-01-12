@@ -6,14 +6,36 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/11 18:58:32 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/12 18:32:09 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	print_all_tet(char ***arr); //rm
-void	print_pos(t_tetris t); //rm
+t_tetris	tet_mapping(char *t, char c, int total)
+{
+	t_tetris	tet;
+	int			col;
+	int			row;
+	int			box_count;
+
+	row = 0;
+	col = -1;
+	box_count = -1;
+	tet.c = c;
+	tet.total = total;
+	while (t[++col])
+	{
+		if (t[col] == '#')
+		{
+			tet.box[++box_count][0] = row;
+			tet.box[box_count][1] = col % 5;
+		}
+		if (t[col] == '\n')
+			row++;
+	}
+	return (tet);
+}
 
 t_ipt	read_input_file(char *file)
 {
@@ -41,12 +63,10 @@ t_ipt	read_input_file(char *file)
 int	error_check(char *tetri)
 {
 	int	i;
-	int	i2;
 	int	block_counter;
 
 	block_counter = 0;
 	i = 0;
-	i2 = 0;
 	while (tetri[i] != '\0')
 	{
 		if ((tetri[i] != '\n' && tetri[i] != '#' && tetri[i] != '.')
@@ -68,24 +88,13 @@ int	error_check(char *tetri)
 int	fillit(char ***map, t_tetris *tet_list)
 {
 	int			i;
-	int			i2;
-	int a;
-	t_coord		coord;
 
 	i = 2;
-	coord.y = 0;
-	coord.x = 0;
-	*map = map_gen(i);
-	while (1)
+	*map = map_gennerator(i);
+	while (comp(map, i, tet_list, 0) != 1)
 	{
-		a = comp1(map, i, coord, tet_list, 0);
-		if (a != 1)
-			{
-				map_liberator(map, i++);
-				*map = map_gen(i);
-			}
-		else
-			break;
+		map_liberator(map, i++);
+		*map = map_gennerator(i);
 	}
 	return (i);
 }
@@ -94,7 +103,7 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	char		c;
-	int			i;
+	static int	i;
 	t_tetris	*tet_list;
 	t_ipt		tetri;
 
@@ -104,26 +113,17 @@ int	main(int argc, char **argv)
 	{
 		tetri = read_input_file(argv[1]);
 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
-		i = 0;
 		c = 'A';
 		while (i < tetri.count)
 		{
 			if (error_check(tetri.array[i]) == -1)
 				return (-1);
-			tet_list[i] = tet_mapping(tetri.array[i]);
-			tet_list[i].c = c++;
-			tet_list[i++].total = tetri.count;
+			tet_list[i] = tet_mapping(tetri.array[i], c++, tetri.count);
+			ft_strdel(tetri.array + i++);
 		}
-		//map_print(map, fillit(&map, tet_list));
+		ft_memdel((void **)&tetri.array);
+		map_liberator(&map, map_printer(map, fillit(&map, tet_list)));
+		ft_memdel((void **)&tet_list);
 	}
-	map_liberator(&map, map_print(map, fillit(&map, tet_list)));
-	free(tet_list);
-	i = 0;
-	while (i < tetri.count)
-	{
-		free(tetri.array[i]);
-		i++;
-	}
-	free(tetri.array);
 	return (0);
 }
