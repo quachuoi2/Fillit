@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/12 15:43:00 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/12 23:20:28 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char	**map_gennerator(size_t size)
 	while (i < size)
 	{
 		map[i] = (char *)ft_memalloc(sizeof(char) * size + 1);
-		ft_memset(map[i++], '.', size);
+		ft_memset(map[i], '.', size);
+		i++;
 	}
 	return (map);
 }
@@ -57,8 +58,9 @@ size_t	map_printer(char **map, size_t size)
 	i = 0;
 	while (i < size)
 	{
-		ft_putstr(map[i++]);
+		ft_putstr(map[i]);
 		ft_putchar('\n');
+		i++;
 	}
 	return (size);
 }

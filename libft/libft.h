@@ -109,6 +109,8 @@ void		ft_putstr_fd(char *s, int fd);
 
 void		ft_putstr(char *s);
 
+int			ft_sqrt(int num);
+
 char		*ft_strcat(char *dest, const char *src);
 
 char		*ft_strchr(const char *s, int c);
