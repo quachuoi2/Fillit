@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/12 18:32:09 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/12 23:04:01 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@ t_tetris	tet_mapping(char *t, char c, int total)
 	int			box_count;
 
 	row = 0;
-	col = -1;
-	box_count = -1;
+	col = 0;
+	box_count = 0;
 	tet.c = c;
 	tet.total = total;
-	while (t[++col])
+	while (t[col])
 	{
 		if (t[col] == '#')
 		{
-			tet.box[++box_count][0] = row;
+			tet.box[box_count][0] = row;
 			tet.box[box_count][1] = col % 5;
+			box_count++;
 		}
 		if (t[col] == '\n')
 			row++;
+		col++;
 	}
 	return (tet);
 }
@@ -55,7 +57,8 @@ t_ipt	read_input_file(char *file)
 			ft_strdel(ipt.array + ipt.count);
 			return (ipt);
 		}
-		ipt.array[ipt.count++][TETRIS_END] = '\0';
+		ipt.array[ipt.count][TETRIS_END] = '\0';
+		ipt.count++;
 	}
 	return (ipt);
 }
@@ -89,11 +92,12 @@ int	fillit(char ***map, t_tetris *tet_list)
 {
 	int			i;
 
-	i = 2;
+	i = ft_sqrt(4 * tet_list[0].total) + 1;
 	*map = map_gennerator(i);
 	while (comp(map, i, tet_list, 0) != 1)
 	{
-		map_liberator(map, i++);
+		map_liberator(map, i);
+		i++;
 		*map = map_gennerator(i);
 	}
 	return (i);
