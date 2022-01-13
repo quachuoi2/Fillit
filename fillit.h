@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/13 04:03:54 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:15:12 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ size_t		map_printer(char **map, size_t size);
 
 int			search(char **map, size_t size, t_tetris tet);
 
-int			try_pos(char ***map, size_t size, t_coord coord, t_tetris *tet);
+int			try(char ***map, size_t size, t_coord coord, t_tetris *tet);
 
 void		tet_place(char ***map, t_coord coord, t_tetris tet, char c);
 
-int			comp(char ***map, size_t size, t_tetris *list, int c_box);
+int			solve(char ***map, size_t size, t_tetris *list, int c_box);
 #endif

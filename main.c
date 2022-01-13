@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/13 03:35:26 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:25:04 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	fillit(char ***map, t_tetris *tet_list)
 
 	i = ft_sqrt(4 * tet_list[0].total) + 1;
 	*map = map_generator(i);
-	while (comp(map, i, tet_list, 0) != 1)
+	while (solve(map, i, tet_list, 0) != 1)
 	{
 		map_liberator(map, i);
 		i++;
@@ -123,11 +123,11 @@ int	main(int argc, char **argv)
 			if (error_check(tetri.array[i]) == -1)
 				return (-1);
 			tet_list[i] = tet_mapping(tetri.array[i], c++, tetri.count);
-			ft_strdel(tetri.array + i++);
+			free(tetri.array[i++]);
 		}
-		ft_memdel((void **)&tetri.array);
+		free(tetri.array);
 		map_liberator(&map, map_printer(map, fillit(&map, tet_list)));
-		ft_memdel((void **)&tet_list);
+		free(tet_list);
 	}
 	return (0);
 }

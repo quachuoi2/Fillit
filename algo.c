@@ -3,45 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/13 03:17:02 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:42:03 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	comp(char ***map, size_t size, t_tetris *list, int c_box)
+int	solve(char ***map, size_t size, t_tetris *lst, int cur)
 {
-	t_coord	coord;
+	t_coord	crd;
 
-	coord.y = -1;
-	while (++coord.y < size)
+	crd.y = -1;
+	while (++crd.y < size)
 	{
-		coord.x = -1;
-		while (++coord.x < size)
+		crd.x = -1;
+		while (++crd.x < size)
 		{
-			if (try_pos(map, size, coord, &list[c_box]) == 1)
+			if ((*map)[crd.y][crd.x] == '.' && try(map, size, crd, &lst[cur]))
 			{
-				tet_place(map, coord, list[c_box], list[c_box].c);
-				if (++c_box == list[0].total)
+				tet_place(map, crd, lst[cur], lst[cur].c);
+				if (++cur == lst[0].total)
 					return (1);
-				coord.y = 0;
-				coord.x = -1;
+				crd.y = 0;
+				crd.x = -1;
 			}
-			else if (coord.x == size - 1 && coord.y == size - 1)
+			else if (crd.x == size - 1 && crd.y == size - 1)
 			{
-				if (c_box-- == 0)
+				if (cur-- == 0)
 					return (0);
-				tet_place(map, list[c_box].coord, list[c_box], '.');
-				coord = list[c_box].coord;
+				tet_place(map, lst[cur].coord, lst[cur], '.');
+				crd = lst[cur].coord;
 			}
 		}
 	}
 }
 
-int	try_pos(char ***map, size_t size, t_coord coord, t_tetris *tet)
+int	try(char ***map, size_t size, t_coord coord, t_tetris *tet)
 {
 	int	index;
 	int	x;
@@ -52,8 +52,7 @@ int	try_pos(char ***map, size_t size, t_coord coord, t_tetris *tet)
 	{
 		x = coord.x + (*tet).box[index][1] - (*tet).box[0][1];
 		y = coord.y + (*tet).box[index][0] - (*tet).box[0][0];
-		if (x >= size || y >= size || (*map)[y][x] != '.'
-			|| (*map)[coord.y][coord.x] != '.')
+		if (x >= size || y >= size || (*map)[y][x] != '.')
 			break ;
 		index++;
 	}

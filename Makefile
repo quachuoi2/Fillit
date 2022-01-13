@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oskari <oskari@student.42.fr>              +#+  +:+       +#+         #
+#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/13 04:37:35 by oskari           ###   ########.fr        #
+#    Updated: 2022/01/13 15:41:22 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ LIBFT= libft/libft.a
 FLAGS= -Wall -Wextra -Werror
 
 all:
-	@gcc $(SOURCES) $(LIBFT) $(HEADER) -I libft -o $(NAME)
+	@gcc $(SOURCES) $(LIBFT) $(HEADER) -o $(NAME)
 
 leak:
-	@gcc $(SOURCES) $(LIBFT) -I libft -fsanitize=leak
+	@gcc $(SOURCES) $(LIBFT) $(HEADER) -fsanitize=leak
 
 clean:
 	@rm -f $(wildcard *.o)
