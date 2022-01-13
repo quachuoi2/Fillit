@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/12 23:04:05 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/13 03:17:02 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	comp(char ***map, size_t size, t_tetris *list, int c_box)
 		coord.x = -1;
 		while (++coord.x < size)
 		{
-			if ((*map)[coord.y][coord.x] == '.' && try_pos(map, size, coord, &list[c_box]) == 1)
+			if (try_pos(map, size, coord, &list[c_box]) == 1)
 			{
 				tet_place(map, coord, list[c_box], list[c_box].c);
 				if (++c_box == list[0].total)
@@ -52,7 +52,8 @@ int	try_pos(char ***map, size_t size, t_coord coord, t_tetris *tet)
 	{
 		x = coord.x + (*tet).box[index][1] - (*tet).box[0][1];
 		y = coord.y + (*tet).box[index][0] - (*tet).box[0][0];
-		if (x >= size || y >= size || (*map)[y][x] != '.')
+		if (x >= size || y >= size || (*map)[y][x] != '.'
+			|| (*map)[coord.y][coord.x] != '.')
 			break ;
 		index++;
 	}

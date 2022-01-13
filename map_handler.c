@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/12 23:20:28 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/13 03:20:09 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	tet_place(char ***map, t_coord coord, t_tetris tet, char c)
 	}
 }
 
-char	**map_gennerator(size_t size)
+char	**map_generator(size_t size)
 {
 	char	**map;
 	size_t	i;

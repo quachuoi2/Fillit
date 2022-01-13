@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/12 23:04:01 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/13 03:35:26 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_tetris	tet_mapping(char *t, char c, int total)
 	return (tet);
 }
 
-t_ipt	read_input_file(char *file)
+t_input	read_input_file(char *file)
 {
-	t_ipt	ipt;
+	t_input	ipt;
 	int		ret;
 	int		fd;
 
@@ -93,12 +93,12 @@ int	fillit(char ***map, t_tetris *tet_list)
 	int			i;
 
 	i = ft_sqrt(4 * tet_list[0].total) + 1;
-	*map = map_gennerator(i);
+	*map = map_generator(i);
 	while (comp(map, i, tet_list, 0) != 1)
 	{
 		map_liberator(map, i);
 		i++;
-		*map = map_gennerator(i);
+		*map = map_generator(i);
 	}
 	return (i);
 }
@@ -109,7 +109,7 @@ int	main(int argc, char **argv)
 	char		c;
 	static int	i;
 	t_tetris	*tet_list;
-	t_ipt		tetri;
+	t_input		tetri;
 
 	if (argc <= 1)
 		ft_putendl("usage: missing argument");

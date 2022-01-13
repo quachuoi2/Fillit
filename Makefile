@@ -3,22 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
+#    By: oskari <oskari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/12 02:53:56 by qnguyen          ###   ########.fr        #
+#    Updated: 2022/01/13 04:37:35 by oskari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME= fillit
-SOURCES= *.c #dont forget to name all the files individually
-HEADER= libft.h
+SOURCES= main.c algo.c map_handler.c
+OBJS= $(SOURCES:.c=.o)
+HEADER= libft/libft.h
 LIBFT= libft/libft.a
 FLAGS= -Wall -Wextra -Werror
 
 all:
-	@gcc $(SOURCES) $(LIBFT) -I libft
+	@gcc $(SOURCES) $(LIBFT) $(HEADER) -I libft -o $(NAME)
 
 leak:
 	@gcc $(SOURCES) $(LIBFT) -I libft -fsanitize=leak

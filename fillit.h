@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/12 18:50:23 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/13 04:03:54 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FILLIT_H
 # define TETRIS_END 20
 # define TETRIS_MAX 26
-# include "libft.h"
+# include "libft/libft.h"
 # include <fcntl.h>
 
 typedef struct s_coordinate
@@ -31,15 +31,15 @@ typedef struct s_tetris
 	t_coord	coord;
 }				t_tetris;
 
-typedef struct s_ipt
+typedef struct s_input
 {
 	char	**array;
 	int		count;
-}	t_ipt;
+}	t_input;
 
 t_tetris	tet_mapping(char *t, char c, int total);
 
-char		**map_gennerator(size_t size);
+char		**map_generator(size_t size);
 
 void		map_liberator(char ***map, size_t size);
 
