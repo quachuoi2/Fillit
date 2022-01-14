@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/13 15:25:04 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/14 18:19:21 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_tetris	tet_mapping(char *t, char c, int total)
 	col = 0;
 	box_count = 0;
 	tet.c = c;
-	tet.total = total;
+	tet.ttl = total;
 	while (t[col])
 	{
 		if (t[col] == '#')
@@ -92,7 +92,7 @@ int	fillit(char ***map, t_tetris *tet_list)
 {
 	int			i;
 
-	i = ft_sqrt(4 * tet_list[0].total) + 1;
+	i = ft_sqrt(4 * tet_list[0].ttl) + 1;
 	*map = map_generator(i);
 	while (solve(map, i, tet_list, 0) != 1)
 	{

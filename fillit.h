@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/13 15:15:12 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/14 18:19:53 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_tetris
 {
 	char	c;
 	int		box[4][2];
-	int		total;
+	int		ttl;
 	t_coord	coord;
 }				t_tetris;
 
@@ -49,7 +49,7 @@ int			search(char **map, size_t size, t_tetris tet);
 
 int			try(char ***map, size_t size, t_coord coord, t_tetris *tet);
 
-void		tet_place(char ***map, t_coord coord, t_tetris tet, char c);
+int			put(char ***map, t_coord coord, t_tetris tet, char c);
 
 int			solve(char ***map, size_t size, t_tetris *list, int c_box);
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oskari <oskari@student.42.fr>              +#+  +:+       +#+         #
+#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/14 14:57:09 by oskari           ###   ########.fr        #
+#    Updated: 2022/01/14 18:27:18 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ FLAGS= -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
+$(NAME): $(SOURCES) $(LIBFT)
 	@gcc $(FLAGS) $(SOURCES) $(LIBFT) $(HEADER) -o $(NAME)
 
 leak:

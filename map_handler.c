@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/14 14:53:48 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/14 18:32:06 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	tet_place(char ***map, t_coord coord, t_tetris tet, char c)
+int	put(char ***map, t_coord coord, t_tetris tet, char c)
 {
 	int	index;
 	int	x;
@@ -26,6 +26,7 @@ void	tet_place(char ***map, t_coord coord, t_tetris tet, char c)
 		(*map)[y][x] = c;
 		index++;
 	}
+	return (1);
 }
 
 char	**map_generator(size_t size)

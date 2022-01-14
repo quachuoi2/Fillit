@@ -3,22 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/14 15:38:45 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/14 18:32:00 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void reset_coord(t_coord *crd)
-{
-	crd->x = -1;
-	crd->y = 0;
-}
-
-int	solve(char ***map, size_t size, t_tetris *lst, int cur)
+int	solve(char ***map, size_t size, t_tetris *lst, int cr)
 {
 	t_coord	crd;
 
@@ -28,19 +22,19 @@ int	solve(char ***map, size_t size, t_tetris *lst, int cur)
 		crd.x = -1;
 		while (++crd.x < size)
 		{
-			if ((*map)[crd.y][crd.x] == '.' && try(map, size, crd, &lst[cur]))
+			if ((*map)[crd.y][crd.x] == '.' && try(map, size, crd, &lst[cr]))
 			{
-				tet_place(map, crd, lst[cur], lst[cur].c);
-				if (++cur == lst[0].total)
+				if (put(map, crd, lst[cr], lst[cr].c) && (++cr == lst[0].ttl))
 					return (1);
-				reset_coord(&crd);
+				crd.x = -1;
+				crd.y = 0;
 			}
 			else if (crd.x == size - 1 && crd.y == size - 1)
 			{
-				if (cur-- == 0)
+				if (cr-- == 0)
 					return (0);
-				tet_place(map, lst[cur].coord, lst[cur], '.');
-				crd = lst[cur].coord;
+				put(map, lst[cr].coord, lst[cr], '.');
+				crd = lst[cr].coord;
 			}
 		}
 	}
