@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/14 18:19:21 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/14 19:58:19 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ t_input	read_input_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	ipt.count = 0;
-	ipt.array = (char **)malloc(sizeof(char *) * TETRIS_MAX);
-	while (ipt.count < 26)
+	ipt.array = (char **)malloc(sizeof(char *) * TETRIS_MAX + 1);
+	while (ipt.count < 27)
 	{
 		ipt.array[ipt.count] = (char *)malloc(sizeof(char) * TETRIS_END + 1);
 		ret = read(fd, ipt.array[ipt.count], TETRIS_END + 1);
@@ -63,7 +63,7 @@ t_input	read_input_file(char *file)
 	return (ipt);
 }
 
-int	error_check(char *tetri)
+int	error_check(char *tetri, int tetri_count)
 {
 	int	i;
 	int	block_counter;
@@ -80,7 +80,7 @@ int	error_check(char *tetri)
 		block_counter += (tetri[i] == '#');
 		i++;
 	}
-	if (i < 20 || block_counter != 4)
+	if (i < 20 || block_counter != 4 || tetri_count > 26)
 	{
 		ft_putstr("error\n");
 		return (-1);
@@ -92,7 +92,9 @@ int	fillit(char ***map, t_tetris *tet_list)
 {
 	int			i;
 
-	i = ft_sqrt(4 * tet_list[0].ttl) + 1;
+	i = ft_sqrt(4 * tet_list[0].ttl);
+	if (i * i < (4 * tet_list[0].ttl))
+		i++;
 	*map = map_generator(i);
 	while (solve(map, i, tet_list, 0) != 1)
 	{
@@ -120,7 +122,7 @@ int	main(int argc, char **argv)
 		c = 'A';
 		while (i < tetri.count)
 		{
-			if (error_check(tetri.array[i]) == -1)
+			if (error_check(tetri.array[i], tetri.count) == -1)
 				return (-1);
 			tet_list[i] = tet_mapping(tetri.array[i], c++, tetri.count);
 			free(tetri.array[i++]);
