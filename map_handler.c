@@ -6,7 +6,7 @@
 /*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/13 03:20:09 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/14 14:53:48 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	map_liberator(char ***map, size_t size)
 
 size_t	map_printer(char **map, size_t size)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < size)

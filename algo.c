@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/13 15:42:03 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/14 14:55:17 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	solve(char ***map, size_t size, t_tetris *lst, int cur)
 				tet_place(map, crd, lst[cur], lst[cur].c);
 				if (++cur == lst[0].total)
 					return (1);
-				crd.y = 0;
-				crd.x = -1;
+				memset(&(crd.x), 0, sizeof(size_t) * 2);
 			}
 			else if (crd.x == size - 1 && crd.y == size - 1)
 			{
@@ -39,13 +38,14 @@ int	solve(char ***map, size_t size, t_tetris *lst, int cur)
 			}
 		}
 	}
+	return (0);
 }
 
 int	try(char ***map, size_t size, t_coord coord, t_tetris *tet)
 {
-	int	index;
-	int	x;
-	int	y;
+	int				index;
+	unsigned int	x;
+	unsigned int	y;
 
 	index = 1;
 	while (index < 4)
