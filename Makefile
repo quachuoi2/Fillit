@@ -6,7 +6,7 @@
 #    By: oskari <oskari@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/14 14:52:49 by oskari           ###   ########.fr        #
+#    Updated: 2022/01/14 14:57:09 by oskari           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ $(NAME):
 	@gcc $(FLAGS) $(SOURCES) $(LIBFT) $(HEADER) -o $(NAME)
 
 leak:
-	@gcc $(SOURCES) $(LIBFT) $(HEADER) -fsanitize=leak
+	@gcc $(FLAGS) $(SOURCES) $(LIBFT) $(HEADER) -fsanitize=leak
 
 clean:
 	@rm -f $(wildcard *.o)

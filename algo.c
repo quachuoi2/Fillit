@@ -6,11 +6,17 @@
 /*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/14 14:55:17 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/14 15:38:45 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+void reset_coord(t_coord *crd)
+{
+	crd->x = -1;
+	crd->y = 0;
+}
 
 int	solve(char ***map, size_t size, t_tetris *lst, int cur)
 {
@@ -27,7 +33,7 @@ int	solve(char ***map, size_t size, t_tetris *lst, int cur)
 				tet_place(map, crd, lst[cur], lst[cur].c);
 				if (++cur == lst[0].total)
 					return (1);
-				memset(&(crd.x), 0, sizeof(size_t) * 2);
+				reset_coord(&crd);
 			}
 			else if (crd.x == size - 1 && crd.y == size - 1)
 			{
