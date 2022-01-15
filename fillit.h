@@ -6,7 +6,7 @@
 /*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/15 20:15:22 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/15 20:45:24 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_input
 	int		count;
 }	t_input;
 
-int			print_error();
+int			print_error(void);
 
 t_tetris	tet_mapping(char *t, int i, int total);
 
