@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/14 19:58:19 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/15 20:26:11 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-t_tetris	tet_mapping(char *t, char c, int total)
+t_tetris	tet_mapping(char *t, int i, int total)
 {
 	t_tetris	tet;
 	int			col;
@@ -22,7 +23,7 @@ t_tetris	tet_mapping(char *t, char c, int total)
 	row = 0;
 	col = 0;
 	box_count = 0;
-	tet.c = c;
+	tet.c = i + 'A';
 	tet.ttl = total;
 	while (t[col])
 	{
@@ -43,6 +44,7 @@ t_input	read_input_file(char *file)
 {
 	t_input	ipt;
 	int		ret;
+	int		p_ret;
 	int		fd;
 
 	fd = open(file, O_RDONLY);
@@ -50,15 +52,18 @@ t_input	read_input_file(char *file)
 	ipt.array = (char **)malloc(sizeof(char *) * TETRIS_MAX + 1);
 	while (ipt.count < 27)
 	{
-		ipt.array[ipt.count] = (char *)malloc(sizeof(char) * TETRIS_END + 1);
+		ipt.array[ipt.count] = (char *)malloc(sizeof(char) * TETRIS_END + 2);
 		ret = read(fd, ipt.array[ipt.count], TETRIS_END + 1);
 		if (ret == 0)
 		{
 			ft_strdel(ipt.array + ipt.count);
+			if (p_ret != 20)
+				ipt.count = -100;
 			return (ipt);
 		}
 		ipt.array[ipt.count][TETRIS_END] = '\0';
 		ipt.count++;
+		p_ret = ret;
 	}
 	return (ipt);
 }
@@ -70,7 +75,7 @@ int	error_check(char *tetri, int tetri_count)
 
 	block_counter = 0;
 	i = 0;
-	while (tetri[i] != '\0')
+	while (tetri[i] != '\0' && i <= 20)
 	{
 		if ((tetri[i] != '\n' && tetri[i] != '#' && tetri[i] != '.')
 			|| (tetri[0] == '\n') || (tetri[i] == '\n' && tetri[i + 1] == '\n')
@@ -81,10 +86,7 @@ int	error_check(char *tetri, int tetri_count)
 		i++;
 	}
 	if (i < 20 || block_counter != 4 || tetri_count > 26)
-	{
-		ft_putstr("error\n");
 		return (-1);
-	}
 	return (1);
 }
 
@@ -108,7 +110,6 @@ int	fillit(char ***map, t_tetris *tet_list)
 int	main(int argc, char **argv)
 {
 	char		**map;
-	char		c;
 	static int	i;
 	t_tetris	*tet_list;
 	t_input		tetri;
@@ -118,13 +119,14 @@ int	main(int argc, char **argv)
 	else
 	{
 		tetri = read_input_file(argv[1]);
+		if (tetri.count < 0)
+			return (print_error());
 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
-		c = 'A';
 		while (i < tetri.count)
 		{
 			if (error_check(tetri.array[i], tetri.count) == -1)
-				return (-1);
-			tet_list[i] = tet_mapping(tetri.array[i], c++, tetri.count);
+				return (print_error());
+			tet_list[i] = tet_mapping(tetri.array[i], i, tetri.count);
 			free(tetri.array[i++]);
 		}
 		free(tetri.array);

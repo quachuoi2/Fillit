@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/14 18:19:53 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/15 20:15:22 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_input
 	int		count;
 }	t_input;
 
-t_tetris	tet_mapping(char *t, char c, int total);
+int			print_error();
+
+t_tetris	tet_mapping(char *t, int i, int total);
 
 char		**map_generator(size_t size);
 
