@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/16 03:31:43 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 16:06:32 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ typedef struct s_input
 
 int			print_error(void);
 
-int			error_check(char *tetri);
+int			free_tetri(int i, t_input *tetri);
 
-t_tetris	tet_mapping(char *t, int i, int total);
+int			error_check(t_input *tetri);
+
+t_tetris	tet_mapping(char **t, int i, int total);
 
 char		**map_generator(size_t size);
 

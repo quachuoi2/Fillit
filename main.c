@@ -6,13 +6,13 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/16 03:39:18 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 16:07:51 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_tetris	tet_mapping(char *t, int i, int total)
+t_tetris	tet_mapping(char **t, int i, int total)
 {
 	t_tetris	tet;
 	int			col;
@@ -24,18 +24,19 @@ t_tetris	tet_mapping(char *t, int i, int total)
 	box_count = 0;
 	tet.c = i + 'A';
 	tet.ttl = total;
-	while (t[col])
+	while ((*t)[col])
 	{
-		if (t[col] == '#')
+		if ((*t)[col] == '#')
 		{
 			tet.box[box_count][0] = row;
 			tet.box[box_count][1] = col % 5;
 			box_count++;
 		}
-		if (t[col] == '\n')
+		if ((*t)[col] == '\n')
 			row++;
 		col++;
 	}
+	free(*t);
 	return (tet);
 }
 
@@ -56,8 +57,14 @@ int	read_input(t_input *ipt, char *file)
 			ft_strdel((*ipt).array + (*ipt).count);
 			return (1);
 		}
-		if ((*ipt).array[(*ipt).count][ret - 1] != '\n')
+		if ((ret == 20 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
+		|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
+		{
+			while ((*ipt).count >= 0)
+				ft_strdel(&(*ipt).array[(*ipt).count]);
+			free((*ipt).array);
 			return (0);
+		}
 		(*ipt).array[(*ipt).count][TETRIS_END] = '\0';
 		(*ipt).count++;
 	}
@@ -84,7 +91,7 @@ int	fillit(char ***map, t_tetris *tet_list)
 int	main(int argc, char **argv)
 {
 	char		**map;
-	static int	i;
+	int			i;
 	t_tetris	*tet_list;
 	t_input		tetri;
 
@@ -92,16 +99,12 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing argument");
 	else
 	{
-		if (!read_input(&tetri, argv[1]) || tetri.count < 0 || tetri.count > 26)
+		if (!read_input(&tetri, argv[1]) || !error_check(&tetri) || tetri.count < 0 || tetri.count > 26)
 			return (print_error());
 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
-		while (i < tetri.count)
-		{
-			if (!error_check(tetri.array[i]))
-				return (print_error());
-			tet_list[i] = tet_mapping(tetri.array[i], i, tetri.count);
-			free(tetri.array[i++]);
-		}
+		i = -1;
+		while (++i < tetri.count)
+			tet_list[i] = tet_mapping(&tetri.array[i], i, tetri.count);
 		free(tetri.array);
 		map_liberator(&map, map_printer(map, fillit(&map, tet_list)));
 		free(tet_list);
