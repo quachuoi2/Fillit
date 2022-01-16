@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/15 20:45:24 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/16 03:31:43 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define TETRIS_MAX 26
 # include "libft/libft.h"
 # include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_coordinate
 {
@@ -38,6 +39,8 @@ typedef struct s_input
 }	t_input;
 
 int			print_error(void);
+
+int			error_check(char *tetri);
 
 t_tetris	tet_mapping(char *t, int i, int total);
 

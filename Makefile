@@ -3,24 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oskari <oskari@student.42.fr>              +#+  +:+       +#+         #
+#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/15 20:11:58 by oskari           ###   ########.fr        #
+#    Updated: 2022/01/16 03:41:50 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME= fillit
 SOURCES= main.c algo.c map_handler.c error.c
-OBJS= $(SOURCES:.c=.o)
 HEADER= libft/libft.h
 LIBFT= libft/libft.a
 FLAGS= -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(SOURCES) $(LIBFT)
+$(NAME): $(SOURCES) $(LIBFT) $(HEADER)
 	@gcc $(FLAGS) $(SOURCES) $(LIBFT) $(HEADER) -o $(NAME)
 
 leak:
