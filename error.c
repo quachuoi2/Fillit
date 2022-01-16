@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/16 16:02:56 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 16:35:19 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,29 @@ int	free_tetri(int i, t_input *tetri)
 
 int	error_check(t_input *tetri)
 {
-	int	i;
-	int	i2;
-	int	block_counter;
-	int	bugs;
+	int				i;
+	int				i2;
+	int				block_counter;
+	static int		bugs;
+	char			**a;
 
-	i2 = 0;
-	bugs = 0;
-	while (i2 < tetri->count)
+	i = -1;
+	a = tetri->array;
+	while (++i < tetri->count && i2 <= 20)
 	{
 		block_counter = 0;
-		i = 0;
-		while (tetri->array[i2][i] != '\0' && i <= 20)
+		i2 = -1;
+		while (a[i][++i2] != '\0')
 		{
-			if ((tetri->array[i2][i] != '\n' && tetri->array[i2][i] != '#' && tetri->array[i2][i] != '.')
-				|| (tetri->array[i2][0] == '\n') || (tetri->array[i2][i] == '\n' && tetri->array[i2][i + 1] == '\n')
-				|| (tetri->array[i2][i] == '#' && tetri->array[i2][i + 1] != '#' && tetri->array[i2][i + 5] != '#'
-					&& tetri->array[i2][i - 1] != '#' && tetri->array[i2][i - 5] != '#'))
+			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
+			|| (a[i][0] == '\n') || (a[i][i2] == '\n' && a[i][i2 + 1] == '\n')
+			|| (a[i][i2] == '#' && a[i][i2 + 1] != '#' && a[i][i2 + 5] != '#'
+			&& a[i][i2 - 1] != '#' && a[i][i2 - 5] != '#'))
 				bugs = 1;
-			block_counter += (tetri->array[i2][i] == '#');
-			i++;
+			block_counter += (a[i][i2] == '#');
 		}
-		if (i < 20 || block_counter != 4 || bugs == 1)
-			return (free_tetri(i, tetri));
-		i2++;
+		if (i2 < 20 || block_counter != 4 || bugs == 1)
+			return (free_tetri(i2, tetri));
 	}
 	return (1);
 }

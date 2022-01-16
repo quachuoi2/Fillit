@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/16 16:07:51 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 16:28:44 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	read_input(t_input *ipt, char *file)
 		|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
 		{
 			while ((*ipt).count >= 0)
-				ft_strdel(&(*ipt).array[(*ipt).count]);
+				ft_strdel(&(*ipt).array[(*ipt).count--]);
 			free((*ipt).array);
 			return (0);
 		}
@@ -100,7 +100,9 @@ int	main(int argc, char **argv)
 	else
 	{
 		if (!read_input(&tetri, argv[1]) || !error_check(&tetri) || tetri.count < 0 || tetri.count > 26)
+		{
 			return (print_error());
+		}
 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
 		while (++i < tetri.count)
