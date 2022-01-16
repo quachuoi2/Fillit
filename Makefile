@@ -6,7 +6,7 @@
 #    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/16 16:27:10 by qnguyen          ###   ########.fr        #
+#    Updated: 2022/01/16 17:45:35 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,8 @@ all: $(NAME)
 $(NAME): $(SOURCES) $(LIBFT) $(HEADER)
 	@gcc $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME)
 
-leak:
-	@gcc $(FLAGS) $(SOURCES) $(LIBFT) $(HEADER) -o $(NAME) -fsanitize=leak
+leak: $(SOURCES) $(LIBFT) $(HEADER)
+	@gcc $(FLAGS) $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME) -fsanitize=leak
 
 clean:
 	@rm -f $(wildcard *.o)
