@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/14 19:51:14 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 17:51:57 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,10 @@ void	map_liberator(char ***map, size_t size)
 
 size_t	map_printer(char **map, size_t size)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < size)
-	{
-		ft_putstr(map[i]);
-		ft_putchar('\n');
-		i++;
-	}
+		ft_putendl(map[i++]);
 	return (size);
 }

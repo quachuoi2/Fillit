@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/16 17:46:41 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 18:28:06 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ int	error_check(t_input *tetri)
 	int		i;
 	int		i2;
 	int		block_counter;
-	int		bug;
 	char	**a;
 
 	i = -1;
-	bug = 0;
 	a = tetri->array;
 	while (++i < tetri->count)
 	{
@@ -64,11 +62,11 @@ int	error_check(t_input *tetri)
 			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
 			|| (a[i][0] == '\n') || (a[i][i2] == '\n' && a[i][i2 + 1] == '\n')
 			|| (a[i][i2] == '#' && surround(a[i], i2, block_counter) == 0))
-				bug = 1;
+				return (free_tetri(i, tetri));
 			block_counter += (a[i][i2] == '#');
 		}
-		if (i2 < 20 || block_counter != 4 || bug == 1)
-			return (free_tetri(i2, tetri));
+		if (i2 < 20 || block_counter != 4)
+			return (free_tetri(i, tetri));
 	}
 	return (1);
 }

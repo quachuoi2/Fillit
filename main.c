@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/16 17:43:07 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/16 18:06:32 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	read_input(t_input *ipt, char *file)
 	int		fd;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (0);
 	(*ipt).count = 0;
 	(*ipt).array = (char **)malloc(sizeof(char *) * TETRIS_MAX + 1);
 	while ((*ipt).count < 27)
@@ -71,8 +73,7 @@ int	fillit(char ***map, t_tetris *tet_list)
 	int			i;
 
 	i = ft_sqrt(4 * tet_list[0].ttl);
-	if (i * i < (4 * tet_list[0].ttl))
-		i++;
+	i = i + (i * i < (4 * tet_list[0].ttl));
 	*map = map_generator(i);
 	while (solve(map, i, tet_list, 0) != 1)
 	{
