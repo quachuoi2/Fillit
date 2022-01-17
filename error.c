@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/17 20:51:25 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/17 20:55:27 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	error_check(t_input *tetri)
 		while (a[i][++i2] != '\0')
 		{
 			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
-			|| (a[i][0] == '\n')
-			|| (a[i][i2] == '\n' && (a[i][i2 + 1] == '\n' || (i2 + 1) % 5 != 0))
-			|| (a[i][i2] == '#' && surround(a[i], i2, block_counter) == 0))
+			|| (a[i][i2] == '\n' && (a[i][i2 + 1] == '\n' || i2 % 5 != 4))
+			|| (a[i][i2] == '#' && surround(a[i], i2, block_counter) == 0)
+			|| (a[i][0] == '\n'))
 				return (free_tetri(tetri->count, tetri));
 			block_counter += (a[i][i2] == '#');
 		}
