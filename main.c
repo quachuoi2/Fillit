@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/16 18:06:32 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/17 15:50:02 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	read_input(t_input *ipt, char *file)
 		return (0);
 	(*ipt).count = 0;
 	(*ipt).array = (char **)malloc(sizeof(char *) * TETRIS_MAX + 1);
-	while ((*ipt).count < 27)
+	while ((*ipt).count < 28)
 	{
 		(*ipt).array[(*ipt).count] = (char *)malloc(TETRIS_END + 1);
 		ret = read(fd, (*ipt).array[(*ipt).count], TETRIS_END + 1);
@@ -59,8 +59,9 @@ int	read_input(t_input *ipt, char *file)
 			ft_strdel((*ipt).array + (*ipt).count);
 			return (1);
 		}
-		if ((ret == 20 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
-		|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
+		if (ret == 20 && (*ipt).array[(*ipt).count][ret - 1] != '\n'
+		|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n')
+		|| ipt->count + 1 > 26)
 			return (free_tetri((*ipt).count, ipt));
 		(*ipt).array[(*ipt).count][TETRIS_END] = '\0';
 		(*ipt).count++;
@@ -96,7 +97,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		if (!read_input(&tetri, argv[1]) || tetri.count <= 0
-			|| tetri.count > 26 || !error_check(&tetri))
+			|| !error_check(&tetri))
 			return (print_error());
 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
