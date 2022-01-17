@@ -6,7 +6,7 @@
 /*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/17 15:50:35 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/17 16:24:53 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ int	error_check(t_input *tetri)
 		block_counter = 0;
 		i2 = -1;
 		if (linewidth(a[i]) == -1)
-			return (free_tetri(i, tetri));
+			return (free_tetri(tetri->count, tetri));
 		while (a[i][++i2] != '\0')
 		{
 			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
 			|| (a[i][0] == '\n') || (a[i][i2] == '\n' && a[i][i2 + 1] == '\n')
 			|| (a[i][i2] == '#' && surround(a[i], i2, block_counter) == 0))
-				return (free_tetri(i, tetri));
+				return (free_tetri(tetri->count, tetri));
 			block_counter += (a[i][i2] == '#');
 		}
 		if (i2 < 20 || block_counter != 4)
-			return (free_tetri(i, tetri));
+			return (free_tetri(tetri->count, tetri));
 	}
 	return (1);
 }

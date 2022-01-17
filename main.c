@@ -6,7 +6,7 @@
 /*   By: oskari <oskari@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/17 15:50:02 by oskari           ###   ########.fr       */
+/*   Updated: 2022/01/17 16:23:59 by oskari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	read_input(t_input *ipt, char *file)
 	if (fd == -1)
 		return (0);
 	(*ipt).count = 0;
-	(*ipt).array = (char **)malloc(sizeof(char *) * TETRIS_MAX + 1);
+	(*ipt).array = (char **)ft_memalloc(sizeof(char *) * TETRIS_MAX + 1);
 	while ((*ipt).count < 28)
 	{
 		(*ipt).array[(*ipt).count] = (char *)malloc(TETRIS_END + 1);
 		ret = read(fd, (*ipt).array[(*ipt).count], TETRIS_END + 1);
-		if (ret == 0)
+		if (ret == 0 && ipt->count > 0)
 		{
 			ft_strdel((*ipt).array + (*ipt).count);
 			return (1);
@@ -96,8 +96,8 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing argument");
 	else
 	{
-		if (!read_input(&tetri, argv[1]) || tetri.count <= 0
-			|| !error_check(&tetri))
+		if (!read_input(&tetri, argv[1]) || !error_check(&tetri)
+			|| tetri.count <= 0)
 			return (print_error());
 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
