@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/18 19:59:38 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:36:29 by okinnune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	fillit(char ***map, t_tetris *tet_list)
 	}
 	return (i);
 }
-int	error_cheque(char *a);
+/*int	error_cheque(char *a);
 void omni_test()
 {
 	static int i0;
@@ -138,7 +138,7 @@ void omni_test()
 		map[i1 - 1] = '.';
 		i0++;
 	}
-}
+}*/
 
 int	main(int argc, char **argv)
 {
@@ -152,13 +152,9 @@ int	main(int argc, char **argv)
 	else
 	{
 		//omni_test();
- 		int a = read_input(&tetri, argv[1]);
-		int b = error_check(&tetri);
- 		if (!a || !b || tetri.count <= 0)
-			{
-				printf("%d %d\n", a, b);
+ 		if (!read_input(&tetri, argv[1]) || !error_check(&tetri)
+			|| tetri.count <= 0)
 				return (print_error());
-			}
  		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
 		while (++i < tetri.count)

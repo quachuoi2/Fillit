@@ -6,11 +6,7 @@
 /*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/18 21:26:49 by okinnune         ###   ########.fr       */
-=======
-/*   Updated: 2022/01/18 19:53:47 by qnguyen          ###   ########.fr       */
->>>>>>> 03dd6bd2a11f90e44111cece1833ba5329e6434d
+/*   Updated: 2022/01/18 21:35:12 by okinnune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +80,7 @@ int	error_check(t_input *tetri)
 	return (1);
 }
 
-int	error_cheque(char *a)
+/*int	error_cheque(char *a)
 {
 	int		i2;
 	int		block_counter;
@@ -103,4 +99,4 @@ int	error_cheque(char *a)
 	if (i2 < 20 || block_counter != 4)
 		return (0);
 	return (1);
-}
+}*/
