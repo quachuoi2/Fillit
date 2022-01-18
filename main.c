@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/17 21:23:24 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/17 21:37:35 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	read_input(t_input *ipt, char *file)
 			ft_strdel((*ipt).array + (*ipt).count);
 			return (1);
 		}
-		if ((ret > 0 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
-		|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n')
-		|| ipt->count > 25 || (ret == 0 && ipt->count == 0))
+		if (ret == 0 || ipt->count > 25
+			|| (ret > 0 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
+			|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
 			return (free_tetri((*ipt).count, ipt));
 		(*ipt).array[(*ipt).count][TETRIS_END] = '\0';
 		(*ipt).count++;
