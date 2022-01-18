@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/18 19:06:45 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:26:49 by okinnune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 int	print_error(void)
 {
@@ -26,22 +27,31 @@ int	free_tetri(int i, t_input *tetri)
 	return (0);
 }
 
-int	surround(char *tet, int i2, int b_c)
+int	surround3(char *tet)
 {
-	int	i;
+	char	*m[4];
+	int		i;
+	int		n;
 
-	i = 1;
-	if ((i2 < 20 && tet[i2 + 1] != '#') && (i2 < 16 && tet[i2 + 5] != '#')
-		&& ((i2 > 0 && tet[i2 - 1] != '#') && (i2 > 4 && tet[i2 - 5] != '#')))
-		return (0);
-	if (b_c < 3)
+	i = -1;
+	m[0] = tet;
+	while (++i < 4)
 	{
-		while (i <= 5 && tet[i2 + i] != '#')
-			i++;
-		if (i == 6)
-			return (0);
+		m[i] = ft_strchr(m[i - (i > 0)], '#');
+		m[i][0] = m[i] - tet + 'a';
 	}
-	return (1);
+	n = 0;
+	i = -1;
+	while (++i < 4)
+	{
+		n += m[i][0] < 117 && (ft_isalpha(m[i][1]) || m[i][1] == '#');
+		n += m[i][0] > 97 && (ft_isalpha(m[i][-1]) || m[i][-1] == '#');
+		n += m[i][0] > 101 && (ft_isalpha(m[i][-5]) || m[i][-5] == '#');
+		n += m[i][0] < 113 && (ft_isalpha(m[i][5]) || m[i][5] == '#');
+		m[i][0] = '#';
+	}
+	printf("n %i\n", n);
+	return (n > 5);
 }
 
 int	error_check(t_input *tetri)
@@ -61,12 +71,11 @@ int	error_check(t_input *tetri)
 		{
 			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
 			|| (a[i][i2] == '\n' && (a[i][i2 + 1] == '\n' || i2 % 5 != 4))
-			|| (a[i][i2] == '#' && surround(a[i], i2, block_counter) == 0)
 			|| (a[i][0] == '\n'))
 				return (0);
 			block_counter += (a[i][i2] == '#');
 		}
-		if (i2 < 20 || block_counter != 4)
+		if (i2 < 20 || block_counter != 4 || surround3(a[i]) == 0)
 			return (0);
 	}
 	return (1);
