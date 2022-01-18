@@ -6,7 +6,7 @@
 #    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/18 19:07:46 by qnguyen          ###   ########.fr        #
+#    Updated: 2022/01/18 19:58:36 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,10 @@ FLAGS= -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(SOURCES) $(LIBFT) $(HEADER)
-	@gcc $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME)
+	@gcc $(FLAGS) $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME)
 
 leak: $(SOURCES) $(LIBFT) $(HEADER)
-	@gcc $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME) -fsanitize=leak
+	@gcc $(FLAGS) $(SOURCES) $(LIBFT) -I $(HEADER) -o b.out -fsanitize=leak
 
 clean:
 	@rm -f $(wildcard *.o)
