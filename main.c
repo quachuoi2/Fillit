@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/18 19:15:05 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/18 19:56:58 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	fillit(char ***map, t_tetris *tet_list)
 	}
 	return (i);
 }
-
-/* void omni_test()
+int	error_cheque(char *a);
+void omni_test()
 {
 	static int i0;
 	static int i1;
@@ -94,8 +94,6 @@ int	fillit(char ***map, t_tetris *tet_list)
 	t_input *inp;
 
 	char *map = ft_strdup("....\n....\n....\n....\n");
-	inp = (t_input *)ft_memalloc(sizeof(t_input));
-	(*inp).array = &map;
 	i0 = 0;
 	while (i0 < TETRIS_END -1)
 	{
@@ -128,8 +126,8 @@ int	fillit(char ***map, t_tetris *tet_list)
 					if (map[i3] == '\n')
 						i3++;
 					map[i3] = '#';
-					if (error_check(inp) == 1)
-						printf("%s\n", map);
+					if ((error_cheque(map)) == 1)
+						printf("%d:\n%s\n", c++ , map);
 					i3++;
 				}
 				map[i3 - 1] = '.';
@@ -141,7 +139,7 @@ int	fillit(char ***map, t_tetris *tet_list)
 		map[i1 - 1] = '.';
 		i0++;
 	}
-} */
+}
 
 int	main(int argc, char **argv)
 {
@@ -154,10 +152,14 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing argument");
 	else
 	{
-		//omni_test();
-		if (!read_input(&tetri, argv[1]) || !error_check(&tetri)
-			|| tetri.count <= 0)
-			return (print_error());
+		omni_test();
+ 		int a = read_input(&tetri, argv[1]);
+		int b = error_check(&tetri);
+ 		if (!a || !b || tetri.count <= 0)
+			{
+				printf("%d %d\n", a, b);
+				return (print_error());
+			}
  		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
 		while (++i < tetri.count)
