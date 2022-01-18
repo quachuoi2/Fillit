@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/17 21:37:35 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/18 19:15:05 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	read_input(t_input *ipt, char *file)
 	if (fd == -1)
 		return (0);
 	(*ipt).count = 0;
-	(*ipt).array = (char **)ft_memalloc(sizeof(char *) * TETRIS_MAX + 1);
+	(*ipt).array = (char **)ft_memalloc(sizeof(char *) * (TETRIS_MAX + 1));
 	while ((*ipt).count < 28)
 	{
-		(*ipt).array[(*ipt).count] = (char *)malloc(TETRIS_END + 1);
+		(*ipt).array[(*ipt).count] = (char *)ft_memalloc(TETRIS_END + 1);
 		ret = read(fd, (*ipt).array[(*ipt).count], TETRIS_END + 1);
 		if (ret == 0 && ipt->count > 0)
 		{
@@ -85,6 +85,64 @@ int	fillit(char ***map, t_tetris *tet_list)
 	return (i);
 }
 
+/* void omni_test()
+{
+	static int i0;
+	static int i1;
+	static int i2;
+	static int i3;
+	t_input *inp;
+
+	char *map = ft_strdup("....\n....\n....\n....\n");
+	inp = (t_input *)ft_memalloc(sizeof(t_input));
+	(*inp).array = &map;
+	i0 = 0;
+	while (i0 < TETRIS_END -1)
+	{
+		if (i0 > 0 && map[i0 - 1] == '#')
+			map[i0 - 1] = '.';
+		if (map[i0] == '\n')
+			i0++;
+		map[i0] = '#';
+		i1 = i0 + 1;
+		while (i1 < TETRIS_END -1)
+		{
+			if (i1 != i0 + 1 && map[i1 - 1] == '#')
+				map[i1 - 1] = '.';
+			if (map[i1] == '\n')
+				i1++;
+			map[i1] = '#';
+			i2 = i1 + 1;
+			while (i2 < TETRIS_END -1)
+			{
+				if (i2 != i1 + 1 && map[i2 - 1] == '#')
+					map[i2 - 1] = '.';
+				if (map[i2] == '\n')
+					i2++;
+				map[i2] = '#';
+				i3 = i2 + 1;
+				while (i3 < TETRIS_END -1)
+				{
+					if (i3 != i2 + 1 && map[i3 - 1] == '#')
+						map[i3 - 1] = '.';
+					if (map[i3] == '\n')
+						i3++;
+					map[i3] = '#';
+					if (error_check(inp) == 1)
+						printf("%s\n", map);
+					i3++;
+				}
+				map[i3 - 1] = '.';
+				i2++;
+			}
+			map[i2 - 1] = '.';
+			i1++;
+		}
+		map[i1 - 1] = '.';
+		i0++;
+	}
+} */
+
 int	main(int argc, char **argv)
 {
 	char		**map;
@@ -96,10 +154,11 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing argument");
 	else
 	{
+		//omni_test();
 		if (!read_input(&tetri, argv[1]) || !error_check(&tetri)
 			|| tetri.count <= 0)
 			return (print_error());
-		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
+ 		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
 		while (++i < tetri.count)
 			tet_list[i] = tet_mapping(&tetri.array[i], i, tetri.count);
