@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/18 19:56:58 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/18 19:59:38 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,8 @@ void omni_test()
 	static int i1;
 	static int i2;
 	static int i3;
-	t_input *inp;
-
 	char *map = ft_strdup("....\n....\n....\n....\n");
+	
 	i0 = 0;
 	while (i0 < TETRIS_END -1)
 	{
@@ -127,7 +126,7 @@ void omni_test()
 						i3++;
 					map[i3] = '#';
 					if ((error_cheque(map)) == 1)
-						printf("%d:\n%s\n", c++ , map);
+						printf("%s\n", map);
 					i3++;
 				}
 				map[i3 - 1] = '.';
@@ -152,7 +151,7 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: missing argument");
 	else
 	{
-		omni_test();
+		//omni_test();
  		int a = read_input(&tetri, argv[1]);
 		int b = error_check(&tetri);
  		if (!a || !b || tetri.count <= 0)
