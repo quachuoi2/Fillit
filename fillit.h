@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/18 22:48:57 by okinnune         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:02:15 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,20 @@ typedef struct s_input
 	int		count;
 }	t_input;
 
+t_tetris	tet_mapping(char **t, int i, int total);
+/* error.c */
 int			print_error(void);
-
-int			free_tetri(int i, t_input *tetri);
-
+int			free_tetri(int max, int outcome, t_input *tetri);
 int			error_check(t_input *tetri);
 
-t_tetris	tet_mapping(char **t, int i, int total);
-
+/* map_handler.c */
 char		**map_generator(size_t size);
-
 void		map_liberator(char ***map, size_t size);
-
 size_t		map_printer(char **map, size_t size);
-
-int			search(char **map, size_t size, t_tetris tet);
-
-int			try(char ***map, size_t size, t_coord coord, t_tetris *tet);
-
 int			put(char ***map, t_coord coord, t_tetris tet, char c);
 
+/* algo.c */
+int			try(char ***map, size_t size, t_coord coord, t_tetris *tet);
 int			solve(char ***map, size_t size, t_tetris *list, int c_box);
+
 #endif
