@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/18 22:55:44 by okinnune         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:15:18 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ int	print_error(void)
 	return (-1);
 }
 
-int	free_tetri(int i, t_input *tetri)
+int	free_tetri(int max, int outcome, t_input *tetri)
 {
-	while (i >= 0)
-		free(tetri->array[i--]);
+	while (max > outcome)
+		ft_strdel(&(*tetri).array[max--]);
+	if (outcome > 0)
+		return (1);
 	free(tetri->array);
 	return (0);
 }
@@ -71,11 +73,11 @@ int	error_check(t_input *tetri)
 			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
 			|| (a[i][i2] == '\n' && (a[i][i2 + 1] == '\n' || i2 % 5 != 4))
 			|| (a[i][0] == '\n'))
-				return (free_tetri(tetri->count, tetri));
+				return (free_tetri(tetri->count, -1, tetri));
 			block_counter += (a[i][i2] == '#');
 		}
 		if (i2 < 20 || block_counter != 4 || surround(a[i]) == 0)
-			return (free_tetri(tetri->count, tetri));
+			return (free_tetri(tetri->count, -1, tetri));
 	}
 	return (1);
 }

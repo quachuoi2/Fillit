@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/19 14:23:03 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/19 15:14:47 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	read_input(t_input *ipt, char *file)
 {
 	int		ret;
 	int		fd;
+	int		prev_ret;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -54,16 +55,14 @@ int	read_input(t_input *ipt, char *file)
 	{
 		(*ipt).array[(*ipt).count] = (char *)ft_memalloc(TETRIS_END + 1);
 		ret = read(fd, (*ipt).array[(*ipt).count], TETRIS_END + 1);
-		if (ret == 0 && ipt->count > 0)
-		{
-			ft_strdel((*ipt).array + (*ipt).count);
-			return (1);
-		}
+		if (ret == 0 && prev_ret == 20 && ipt->count > 0)
+			return (free_tetri((*ipt).count, (*ipt).count - 1, ipt));
 		if (ret == 0 || ipt->count > 25
 			|| (ret > 0 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
 			|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
-			return (free_tetri((*ipt).count, ipt));
+			return (free_tetri((*ipt).count, -1, ipt));
 		(*ipt).array[(*ipt).count][TETRIS_END] = '\0';
+		prev_ret = ret;
 		(*ipt).count++;
 	}
 	return (1);
@@ -92,6 +91,7 @@ int	main(int argc, char **argv)
 	size_t		size;
 	t_input		tetri;
 	t_tetris	tet_list[27];
+
 	if (argc != 2)
 		ft_putendl("usage: ./fillit filename");
 	else
