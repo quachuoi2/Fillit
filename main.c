@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/18 21:53:15 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/19 14:23:03 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,22 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	int			i;
-	t_tetris	*tet_list;
+	size_t		size;
 	t_input		tetri;
-
-	if (argc <= 1)
-		ft_putendl("usage: missing argument");
+	t_tetris	tet_list[27];
+	if (argc != 2)
+		ft_putendl("usage: ./fillit filename");
 	else
 	{
 		if (!read_input(&tetri, argv[1]) || !error_check(&tetri)
 			|| tetri.count <= 0)
 			return (print_error());
-		tet_list = (t_tetris *)ft_memalloc(sizeof(t_tetris) * tetri.count);
 		i = -1;
 		while (++i < tetri.count)
 			tet_list[i] = tet_mapping(&tetri.array[i], i, tetri.count);
 		free(tetri.array);
-		map_liberator(&map, map_printer(map, fillit(&map, tet_list)));
-		free(tet_list);
+		size = fillit(&map, tet_list);
+		map_liberator(&map, map_printer(map, size));
 	}
 	return (0);
 }
