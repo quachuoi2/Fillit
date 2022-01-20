@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/20 03:06:48 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:10:29 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	put(char ***map, t_coord coord, t_tetris tet, char c)
 {
-	int	index;
+	int		index;
 	ssize_t	x;
 	ssize_t	y;
 
@@ -34,11 +34,11 @@ char	**map_generator(ssize_t size)
 	char	**map;
 	ssize_t	i;
 
-	map = (char **)ft_memalloc(sizeof (char *) * (long unsigned int)size);
+	map = (char **)ft_memalloc(sizeof (char *) * (long unsigned)size);
 	i = 0;
 	while (i < size)
 	{
-		map[i] = (char *)ft_memalloc(sizeof(char) * (long unsigned int)(size + 1));
+		map[i] = (char *)ft_memalloc(sizeof(char) * (long unsigned)size + 1);
 		ft_memset(map[i], '.', (size_t)size);
 		i++;
 	}
