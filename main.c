@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 03:04:44 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:13:54 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_tetris	tet_mapping(char **t, int i, int total)
 	row = 0;
 	col = 0;
 	box_count = 0;
-	tet.c = i + 'A';
+	tet.c = (char)(i + 'A');
 	tet.ttl = total;
 	while ((*t)[col])
 	{
