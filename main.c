@@ -6,7 +6,7 @@
 /*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 13:01:29 by okinnune         ###   ########.fr       */
+/*   Updated: 2022/01/20 13:27:48 by okinnune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	get_tet_size(t_tetris *tet)
 t_tetris	tet_mapping(char **t, int i, int total)
 {
 	t_tetris	tet;
-	ssize_t		col;
-	ssize_t		row;
+	int			col;
+	int			row;
 	int			box_count;
 
 	row = 0;
 	col = 0;
 	box_count = 0;
-	tet.c = (char)(i + 'A');
+	tet.c = i + 'A';
 	tet.ttl = total;
 	while ((*t)[col])
 	{
@@ -72,7 +72,7 @@ int	read_input(t_input *ipt, char *file)
 		(*ipt).array[(*ipt).count] = (char *)ft_memalloc(TETRIS_END + 1);
 		ret = read(fd, (*ipt).array[(*ipt).count], TETRIS_END + 1);
 		if (ret == 0 && prev_ret == 20 && ipt->count > 0)
-			return (free_tetri((*ipt).count, (*ipt).count, ipt));
+			return (free_tetri((*ipt).count, (*ipt).count - 1, ipt));
 		if (ret == 0 || ipt->count > 25
 			|| (ret > 0 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
 			|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	int			i;
-	ssize_t		size;
+	size_t		size;
 	t_input		tetri;
 	t_tetris	tet_list[27];
 
