@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/20 16:30:59 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 18:42:44 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	error_check(t_input *tetri)
 			if ((a[i][i2] != '\n' && a[i][i2] != '#' && a[i][i2] != '.')
 			|| (a[i][i2] == '\n' && (a[i][i2 + 1] == '\n' || i2 % 5 != 4))
 			|| (a[i][0] == '\n'))
-				return (free_tetri(tetri->count, -1, tetri));
+				return (free_tetri(tetri->count - 1, -1, tetri));
 			block_counter += (a[i][i2] == '#');
 		}
 		if (i2 < 20 || block_counter != 4 || surround(a[i]) == 0)
-			return (free_tetri(tetri->count, -1, tetri));
+			return (free_tetri(tetri->count - 1, -1, tetri));
 	}
 	return (1);
 }
