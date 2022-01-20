@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 16:44:51 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 18:02:04 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,27 @@ void	get_tet_size(t_tetris *tet)
 {
 	int		i;
 	ssize_t	h_min;
-	ssize_t	h_max;
 	ssize_t	w_min;
-	ssize_t	w_max;
 
 	i = 0;
+	tet->w_l[0] = 0;
+	tet->w_l[1] = 0;
 	h_min = (*tet).box[0][0];
-	h_max = 0;
 	w_min = (*tet).box[0][1];
-	w_max = 0;
 	while (i < 4)
 	{
 		if ((*tet).box[i][0] < h_min)
-			w_min = (*tet).box[i][0];
-		if ((*tet).box[i][0] > h_max)
-			w_max = (*tet).box[i][0];
+			h_min = (*tet).box[i][0];
+		if ((*tet).box[i][0] > tet->w_l[0])
+			tet->w_l[0] = (*tet).box[i][0];
 		if ((*tet).box[i][1] < w_min)
 			w_min = (*tet).box[i][1];
-		if ((*tet).box[i][1] > w_max)
-			w_max = (*tet).box[i][1];
+		if ((*tet).box[i][1] > tet->w_l[1])
+			tet->w_l[1] = (*tet).box[i][1];
 		i++;
 	}
-	(*tet).w_l[0] = h_max - h_min;
-	(*tet).w_l[1] = w_max - w_min;
+	(*tet).w_l[0] = tet->w_l[0] - h_min;
+	(*tet).w_l[1] = tet->w_l[1] - w_min;
 }
 
 t_tetris	tet_mapping(char **t, int i, int total)
