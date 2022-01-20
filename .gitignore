@@ -6,3 +6,7 @@ dif
 our_result
 their_result
 fillit
+leak
+x
+*.o
+

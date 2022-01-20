@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/01/20 03:14:17 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 16:30:59 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	free_tetri(int max, int outcome, t_input *tetri)
 {
 	while (max > outcome)
 		ft_strdel(&(*tetri).array[max--]);
-	if (outcome > 0)
+	if (outcome >= 0)
 		return (1);
 	free(tetri->array);
 	return (0);
