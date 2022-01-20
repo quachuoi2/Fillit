@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 02:35:07 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:04:44 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	get_tet_size(t_tetris *tet)
 {
 	int		i;
-	size_t	w_min;
-	size_t	w_max;
+	ssize_t	w_min;
+	ssize_t	w_max;
 
 	i = 0;
 	w_min = 0;
@@ -36,8 +36,8 @@ void	get_tet_size(t_tetris *tet)
 t_tetris	tet_mapping(char **t, int i, int total)
 {
 	t_tetris	tet;
-	int			col;
-	int			row;
+	ssize_t		col;
+	ssize_t		row;
 	int			box_count;
 
 	row = 0;
@@ -64,9 +64,9 @@ t_tetris	tet_mapping(char **t, int i, int total)
 
 int	read_input(t_input *ipt, char *file)
 {
-	int		ret;
 	int		fd;
-	int		prev_ret;
+	ssize_t	ret;
+	ssize_t	prev_ret;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
@@ -91,12 +91,12 @@ int	read_input(t_input *ipt, char *file)
 	return (1);
 }
 
-int	fillit(char ***map, t_tetris *tet_list)
+ssize_t	fillit(char ***map, t_tetris *tet_list)
 {
-	int			i;
+	ssize_t	i;
 
-	i = ft_sqrt(4 * tet_list[0].ttl);
-	i = i + (i * i < (4 * tet_list[0].ttl));
+	i = (ssize_t)ft_sqrt(4 * tet_list[0].ttl);
+	i = i + (i * i < (ssize_t)(4 * tet_list[0].ttl));
 	*map = map_generator(i);
 	while (solve(map, i, tet_list, 0) != 1)
 	{
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	int			i;
-	size_t		size;
+	ssize_t		size;
 	t_input		tetri;
 	t_tetris	tet_list[27];
 

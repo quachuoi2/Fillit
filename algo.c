@@ -6,19 +6,19 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/20 02:44:06 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:02:28 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	reset_coordinate(size_t *x, size_t *y)
+void	reset_coordinate(ssize_t *x, ssize_t *y)
 {
 	*x = -1;
 	*y = 0;
 }
 
-int	solve(char ***map, size_t size, t_tetris *lst, int cr)
+int	solve(char ***map, ssize_t size, t_tetris *lst, int cr)
 {
 	t_coord	crd;
 
@@ -47,11 +47,11 @@ int	solve(char ***map, size_t size, t_tetris *lst, int cr)
 	return (0);
 }
 
-int	try(char ***map, size_t size, t_coord coord, t_tetris *tet)
+int	try(char ***map, ssize_t size, t_coord coord, t_tetris *tet)
 {
-	int				index;
-	unsigned int	x;
-	unsigned int	y;
+	int		index;
+	ssize_t	x;
+	ssize_t	y;
 
 	index = 1;
 	while (index < 4)

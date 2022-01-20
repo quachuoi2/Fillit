@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 02:46:04 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:04:31 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 
 typedef struct s_coordinate
 {
-	size_t	x;
-	size_t	y;
+	ssize_t	x;
+	ssize_t	y;
 }				t_coord;
 
 typedef struct s_tetris
 {
 	char	c;
-	size_t	box[4][2];
 	int		ttl;
-	int		w_l[2];
+	ssize_t	box[4][2];
+	ssize_t	w_l[2];
 	t_coord	coord;
 }				t_tetris;
 
@@ -40,23 +40,23 @@ typedef struct s_input
 
 /* main.c */
 void		get_tet_size(t_tetris *tet);
-t_tetris	tet_mapping(char **t, int i, int total);
 int			read_input(t_input *ipt, char *file);
-int			fillit(char ***map, t_tetris *tet_list);
+t_tetris	tet_mapping(char **t, int i, int total);
+ssize_t		fillit(char ***map, t_tetris *tet_list);
 
 /* error.c */
-void		reset_coordinate(size_t *x, size_t *y);
+void		reset_coordinate(ssize_t *x, ssize_t *y);
 int			print_error(void);
 int			free_tetri(int max, int outcome, t_input *tetri);
 int			error_check(t_input *tetri);
 
 /* map_handler.c */
-char		**map_generator(size_t size);
-void		map_liberator(char ***map, size_t size);
-size_t		map_printer(char **map, size_t size);
+void		map_liberator(char ***map, ssize_t size);
+char		**map_generator(ssize_t size);
 int			put(char ***map, t_coord coord, t_tetris tet, char c);
+ssize_t		map_printer(char **map, ssize_t size);
 
 /* algo.c */
-int			try(char ***map, size_t size, t_coord coord, t_tetris *tet);
-int			solve(char ***map, size_t size, t_tetris *lst, int cr);
+int			try(char ***map, ssize_t size, t_coord coord, t_tetris *tet);
+int			solve(char ***map, ssize_t size, t_tetris *lst, int cr);
 #endif

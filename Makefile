@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+         #
+#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/19 14:37:56 by okinnune         ###   ########.fr        #
+#    Updated: 2022/01/20 02:52:28 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SOURCES= main.c algo.c map_handler.c error.c
 HEADER= libft/
 LIBFT= libft/libft.a
 FLAGS= -Wall -Wextra -Werror
-
+NITPICK = -Wpedantic -Wunused -Wconversion -Wunreachable-code -Wtype-limits
 all: $(NAME)
 
 $(NAME): $(SOURCES) $(LIBFT) $(HEADER)
@@ -26,7 +26,7 @@ $(LIBFT):
 	make -C libft
 
 leak: $(SOURCES) $(LIBFT) $(HEADER)
-	@gcc $(FLAGS) $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME) -fsanitize=leak
+	@gcc $(FLAGS) $(NITPICK) $(SOURCES) $(LIBFT) -I $(HEADER) -o $(NAME) -fsanitize=leak
 
 clean:
 	make -C libft clean

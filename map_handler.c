@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/16 17:51:57 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:06:48 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	put(char ***map, t_coord coord, t_tetris tet, char c)
 {
 	int	index;
-	int	x;
-	int	y;
+	ssize_t	x;
+	ssize_t	y;
 
 	index = 0;
 	while (index < 4)
@@ -29,32 +29,32 @@ int	put(char ***map, t_coord coord, t_tetris tet, char c)
 	return (1);
 }
 
-char	**map_generator(size_t size)
+char	**map_generator(ssize_t size)
 {
 	char	**map;
-	size_t	i;
+	ssize_t	i;
 
-	map = (char **)ft_memalloc(sizeof (char *) * size);
+	map = (char **)ft_memalloc(sizeof (char *) * (long unsigned int)size);
 	i = 0;
 	while (i < size)
 	{
-		map[i] = (char *)ft_memalloc(sizeof(char) * size + 1);
-		ft_memset(map[i], '.', size);
+		map[i] = (char *)ft_memalloc(sizeof(char) * (long unsigned int)(size + 1));
+		ft_memset(map[i], '.', (size_t)size);
 		i++;
 	}
 	return (map);
 }
 
-void	map_liberator(char ***map, size_t size)
+void	map_liberator(char ***map, ssize_t size)
 {
 	while (size--)
 		ft_strdel(*map + size);
 	ft_memdel((void **)map);
 }
 
-size_t	map_printer(char **map, size_t size)
+ssize_t	map_printer(char **map, ssize_t size)
 {
-	size_t	i;
+	ssize_t	i;
 
 	i = 0;
 	while (i < size)
