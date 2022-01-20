@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 03:13:54 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 05:53:17 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	get_tet_size(t_tetris *tet)
 	ssize_t	w_max;
 
 	i = 0;
-	w_min = 0;
+	w_min = (*tet).box[0][1];
 	w_max = 0;
 	while (i < 4)
 	{

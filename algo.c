@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/20 03:02:28 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 05:53:26 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	solve(char ***map, ssize_t size, t_tetris *lst, int cr)
 		crd.x = -1;
 		while (++crd.x < size)
 		{
-			if ((*map)[crd.y][crd.x] == '.' && crd.x + lst[cr].w_l[1] <= size
-			&& crd.y + lst[cr].w_l[0] <= size && try(map, size, crd, &lst[cr]))
+			if ((*map)[crd.y][crd.x] == '.' && crd.x + lst[cr].w_l[1] < size + 2
+			&& crd.y + lst[cr].w_l[0] < size && try(map, size, crd, &lst[cr]))
 			{
 				if (put(map, crd, lst[cr], lst[cr].c) && (++cr == lst[0].ttl))
 					return (1);
