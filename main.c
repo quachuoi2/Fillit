@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/19 16:49:27 by okinnune         ###   ########.fr       */
+/*   Updated: 2022/01/20 02:35:07 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+void	get_tet_size(t_tetris *tet)
+{
+	int		i;
+	size_t	w_min;
+	size_t	w_max;
+
+	i = 0;
+	w_min = 0;
+	w_max = 0;
+	while (i < 4)
+	{
+		if ((*tet).box[i][1] < w_min)
+			w_min = (*tet).box[i][1];
+		if ((*tet).box[i][1] > w_max)
+			w_max = (*tet).box[i][1];
+		i++;
+	}
+	(*tet).w_l[0] = (*tet).box[3][0];
+	(*tet).w_l[1] = w_max - w_min;
+}
 
 t_tetris	tet_mapping(char **t, int i, int total)
 {
@@ -36,6 +57,7 @@ t_tetris	tet_mapping(char **t, int i, int total)
 			row++;
 		col++;
 	}
+	get_tet_size(&tet);
 	free(*t);
 	return (tet);
 }

@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/19 15:02:15 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 02:46:04 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ typedef struct s_coordinate
 typedef struct s_tetris
 {
 	char	c;
-	int		box[4][2];
+	size_t	box[4][2];
 	int		ttl;
+	int		w_l[2];
 	t_coord	coord;
 }				t_tetris;
 
@@ -37,8 +38,14 @@ typedef struct s_input
 	int		count;
 }	t_input;
 
+/* main.c */
+void		get_tet_size(t_tetris *tet);
 t_tetris	tet_mapping(char **t, int i, int total);
+int			read_input(t_input *ipt, char *file);
+int			fillit(char ***map, t_tetris *tet_list);
+
 /* error.c */
+void		reset_coordinate(size_t *x, size_t *y);
 int			print_error(void);
 int			free_tetri(int max, int outcome, t_input *tetri);
 int			error_check(t_input *tetri);
@@ -51,6 +58,5 @@ int			put(char ***map, t_coord coord, t_tetris tet, char c);
 
 /* algo.c */
 int			try(char ***map, size_t size, t_coord coord, t_tetris *tet);
-int			solve(char ***map, size_t size, t_tetris *list, int c_box);
-
+int			solve(char ***map, size_t size, t_tetris *lst, int cr);
 #endif
