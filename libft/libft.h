@@ -43,6 +43,10 @@ int			ft_countwords(const char *s, char c);
 
 int			ft_diglen(int n);
 
+int			ft_max(int a, int b);
+
+int			ft_min(int a, int b);
+
 int			ft_isalnum(int c);
 
 int			ft_isalpha(int c);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
+#    By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/29 19:02:23 by qnguyen           #+#    #+#              #
-#    Updated: 2022/01/12 23:16:05 by qnguyen          ###   ########.fr        #
+#    Updated: 2022/01/20 12:59:33 by okinnune         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ ft_putendl_fd ft_putendl ft_putnbr_fd ft_putnbr ft_putstr ft_putstr_fd ft_sqrt\
 ft_strcat ft_strchr ft_strclr ft_strcmp ft_strcpy ft_strdel ft_strdup \
 ft_strequ ft_striter ft_striteri ft_strjoin ft_strlcat ft_strlen ft_strmap \
 ft_strmapi ft_strncat ft_strncmp ft_strncpy ft_strnequ ft_strnew ft_strnstr \
-ft_strrchr ft_strsplit ft_strstr ft_strsub ft_strtrim ft_tolower ft_toupper
+ft_strrchr ft_strsplit ft_strstr ft_strsub ft_strtrim ft_tolower ft_toupper \
+ft_min ft_max
 
 all: $(NAME)
 

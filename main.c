@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 05:53:17 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/01/20 13:01:29 by okinnune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 void	get_tet_size(t_tetris *tet)
 {
-	int		i;
-	ssize_t	w_min;
-	ssize_t	w_max;
+	int		w_min;
+	int		h_min;
 
-	i = 0;
-	w_min = (*tet).box[0][1];
-	w_max = 0;
-	while (i < 4)
-	{
-		if ((*tet).box[i][1] < w_min)
-			w_min = (*tet).box[i][1];
-		if ((*tet).box[i][1] > w_max)
-			w_max = (*tet).box[i][1];
-		i++;
-	}
-	(*tet).w_l[0] = (*tet).box[3][0];
-	(*tet).w_l[1] = w_max - w_min;
+	h_min = ft_min(ft_min(tet->box[0][0], tet->box[1][0]),
+			ft_min(tet->box[2][0], tet->box[3][0]));
+	tet->w_l[0] = ft_max(ft_max(tet->box[0][0], tet->box[1][0]),
+			ft_max(tet->box[2][0], tet->box[3][0])) - h_min;
+	w_min = ft_min(ft_min(tet->box[0][1], tet->box[1][1]),
+			ft_min(tet->box[2][1], tet->box[3][1]));
+	tet->w_l[1] = ft_max(ft_max(tet->box[0][1], tet->box[1][1]),
+			ft_max(tet->box[2][1], tet->box[3][1])) - w_min;
 }
 
 t_tetris	tet_mapping(char **t, int i, int total)
@@ -78,7 +72,7 @@ int	read_input(t_input *ipt, char *file)
 		(*ipt).array[(*ipt).count] = (char *)ft_memalloc(TETRIS_END + 1);
 		ret = read(fd, (*ipt).array[(*ipt).count], TETRIS_END + 1);
 		if (ret == 0 && prev_ret == 20 && ipt->count > 0)
-			return (free_tetri((*ipt).count, (*ipt).count - 1, ipt));
+			return (free_tetri((*ipt).count, (*ipt).count, ipt));
 		if (ret == 0 || ipt->count > 25
 			|| (ret > 0 && (*ipt).array[(*ipt).count][ret - 1] != '\n')
 			|| (ret == 21 && (*ipt).array[(*ipt).count][ret - 2] != '\n'))
