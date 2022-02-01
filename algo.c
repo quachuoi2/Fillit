@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 02:18:18 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/20 05:53:26 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/02/01 20:22:00 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,13 @@ int	try(char ***map, ssize_t size, t_coord coord, t_tetris *tet)
 	index = 1;
 	while (index < 4)
 	{
-		x = coord.x + (*tet).box[index][1] - (*tet).box[0][1];
-		y = coord.y + (*tet).box[index][0] - (*tet).box[0][0];
-		if (x >= size || y >= size || (*map)[y][x] != '.')
-			break ;
+		x = coord.x + (*tet).box[index][1];
+		y = coord.y + (*tet).box[index][0];
+		if (x < 0 || y < 0 || x >= size || y >= size || (*map)[y][x] != '.')
+			return (0);
 		index++;
 	}
-	if (index == 4)
-	{
-		(*tet).coord.x = coord.x;
-		(*tet).coord.y = coord.y;
-		return (1);
-	}
-	return (0);
+	(*tet).coord.x = coord.x;
+	(*tet).coord.y = coord.y;
+	return (1);
 }

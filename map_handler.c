@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 01:50:15 by qnguyen           #+#    #+#             */
-/*   Updated: 2022/01/20 03:10:29 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/02/01 19:39:14 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	put(char ***map, t_coord coord, t_tetris tet, char c)
 	index = 0;
 	while (index < 4)
 	{
-		x = coord.x + tet.box[index][1] - tet.box[0][1];
-		y = coord.y + tet.box[index][0] - tet.box[0][0];
+		x = coord.x + tet.box[index][1];
+		y = coord.y + tet.box[index][0];
 		(*map)[y][x] = c;
 		index++;
 	}

@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/01/20 03:04:31 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/02/01 20:19:35 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		reset_coordinate(ssize_t *x, ssize_t *y);
 int			print_error(void);
 int			free_tetri(int max, int outcome, t_input *tetri);
 int			error_check(t_input *tetri);
+void		sad_variable_initializer(ssize_t *a, ssize_t *b, ssize_t *c, ssize_t *d);
 
 /* map_handler.c */
 void		map_liberator(char ***map, ssize_t size);
