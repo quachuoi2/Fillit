@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/02/01 20:36:00 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/02/01 22:55:50 by okinnune         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ t_tetris	tet_mapping(char **t, int i, int total)
 	int			box_count;
 
 	box_count = 0;
-	//sad_variable_initializer(&row, &col, &tet.box[0][0], &tet.box[0][1]);  //add 2s run time ?????
-	/* row = 0;					//
-	col = 0;					//
-	tet.box[0][0] = 0;			//	runs faster but norm
-	tet.box[0][1] = 0; */		//
+	row = 0;
+	col = 0;
+	tet.box[0][0] = 0;
+	tet.box[0][1] = 0;
 	tet.c = (char)(i + 'A');
 	tet.ttl = total;
 	while ((*t)[col])
@@ -49,9 +48,7 @@ t_tetris	tet_mapping(char **t, int i, int total)
 			tet.box[box_count][1] = (col % 5) - tet.box[0][1];
 			box_count++;
 		}
-		if ((*t)[col] == '\n')
-			row++;
-		col++;
+		row += ((*t)[col++] == '\n');
 	}
 	get_tet_size(&tet);
 	free(*t);
