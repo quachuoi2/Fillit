@@ -6,19 +6,11 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 20:10:31 by oskari            #+#    #+#             */
-/*   Updated: 2022/02/01 20:17:36 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/02/02 10:55:01 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-void	sad_variable_initializer(ssize_t *a, ssize_t *b, ssize_t *c, ssize_t *d)
-{
-	*a = 0;
-	*b = 0;
-	*c = 0;
-	*d = 0;
-}
 
 int	print_error(void)
 {
