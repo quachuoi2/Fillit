@@ -14,7 +14,6 @@
 
 void	ft_strdel(char **as)
 {
-	ft_memset(*as, '\0', ft_strlen(*as));
 	free(*as);
 	*as = NULL;
 }

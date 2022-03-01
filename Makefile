@@ -6,10 +6,9 @@
 #    By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 17:57:56 by okinnune          #+#    #+#              #
-#    Updated: 2022/01/20 02:52:28 by qnguyen          ###   ########.fr        #
+#    Updated: 2022/03/01 23:14:02 by qnguyen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 NAME= fillit
 SOURCES= main.c algo.c map_handler.c error.c

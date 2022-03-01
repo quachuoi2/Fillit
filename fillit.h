@@ -6,7 +6,7 @@
 /*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:38:49 by okinnune          #+#    #+#             */
-/*   Updated: 2022/02/02 10:55:15 by qnguyen          ###   ########.fr       */
+/*   Updated: 2022/02/04 10:53:27 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_input
 
 /* main.c */
 void		get_tet_size(t_tetris *tet);
-int			read_input(t_input *ipt, char *file);
+int			read_input(t_input *ipt, int fd);
 t_tetris	tet_mapping(char **t, int i, int total);
 ssize_t		fillit(char ***map, t_tetris *tet_list);
 

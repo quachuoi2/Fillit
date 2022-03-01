@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okinnune <okinnune@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qnguyen <qnguyen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:20:41 by okinnune          #+#    #+#             */
-/*   Updated: 2022/02/01 22:55:50 by okinnune         ###   ########.fr       */
+/*   Updated: 2022/02/04 10:53:17 by qnguyen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,13 @@ t_tetris	tet_mapping(char **t, int i, int total)
 	return (tet);
 }
 
-int	read_input(t_input *ipt, char *file)
+int	read_input(t_input *ipt, int fd)
 {
-	int		fd;
 	ssize_t	ret;
 	ssize_t	prev_ret;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (0);
 	(*ipt).count = 0;
+	prev_ret = 0;
 	(*ipt).array = (char **)ft_memalloc(sizeof(char *) * (TETRIS_MAX + 1));
 	while ((*ipt).count < 28)
 	{
@@ -80,7 +77,6 @@ int	read_input(t_input *ipt, char *file)
 		prev_ret = ret;
 		(*ipt).count++;
 	}
-	close(fd);
 	return (1);
 }
 
@@ -112,9 +108,11 @@ int	main(int argc, char **argv)
 		ft_putendl("usage: ./fillit filename");
 	else
 	{
-		if (!read_input(&tetri, argv[1]) || !error_check(&tetri)
+		i = open(argv[1], O_RDONLY);
+		if (i == -1 || !read_input(&tetri, i) || !error_check(&tetri)
 			|| tetri.count <= 0)
 			return (print_error());
+		close(i);
 		i = -1;
 		while (++i < tetri.count)
 			tet_list[i] = tet_mapping(&tetri.array[i], i, tetri.count);
