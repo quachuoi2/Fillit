@@ -5,9 +5,9 @@ A Tetriminos is a shape made of 4 squares, often found in the game Tetris. Examp
 
 `make` to compile the program
 
-`./tetgen X > "filename"` to generate a file of X tetriminos.
+`bash tetgen X > "filename"` to generate a file of X tetriminos.
 
-`./fillit "filename"` to run the program with the given file as argument.
+`bash fillit "filename"` to run the program with the given file as argument.
 
 The result is replaced with blocks of letters in alphabetical order to show the order of placement.
 
